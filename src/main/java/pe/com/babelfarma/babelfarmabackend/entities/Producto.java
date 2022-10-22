@@ -1,6 +1,8 @@
 package pe.com.babelfarma.babelfarmabackend.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "productos")
@@ -14,12 +16,24 @@ public class Producto {
     private String descripcion;
 
 
-    public Producto(String nombre, int stock, double precio, String descripcion) {
+    @ManyToOne
+    @JoinColumn(name = "id_categoria", nullable = false)
+
+    private Categoria categoria;
+
+
+
+    @ManyToMany(mappedBy = "productos")
+    private List<Farmacia> farmacias = new ArrayList<>();
+
+
+
+    public Producto(String nombre, int stock, double precio, String descripcion, Categoria categoria) {
         this.nombre = nombre;
         this.stock = stock;
         this.precio = precio;
         this.descripcion = descripcion;
-
+        this.categoria = categoria;
     }
 
     public Producto() {
@@ -65,5 +79,20 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public List<Farmacia> getFarmacias() {
+        return farmacias;
+    }
+
+    public void setFarmacias(List<Farmacia> farmacias) {
+        this.farmacias = farmacias;
+    }
 
 }

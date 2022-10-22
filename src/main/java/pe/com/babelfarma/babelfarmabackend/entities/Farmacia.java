@@ -20,7 +20,7 @@ public class Farmacia {
             @JoinTable(name = "farmacias_productos",
                     joinColumns = @JoinColumn(name = "farmacia_id", referencedColumnName = "id", nullable = false),
                     inverseJoinColumns = @JoinColumn(name = "producto_id", referencedColumnName = "id",nullable = false))
-    List<Producto> productos=new ArrayList<>();
+    List<Producto> productos = new ArrayList<>();
 
     public Farmacia() {
     }
