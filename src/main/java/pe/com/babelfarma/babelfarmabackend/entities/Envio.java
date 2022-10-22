@@ -7,19 +7,12 @@ import javax.persistence.*;
 public class Envio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     private String encargado;
     private String direccionEnvio;
 
-    public Venta getVenta() {
-        return venta;
-    }
-
-    public void setVenta(Venta venta) {
-        this.venta = venta;
-    }
-
-    @OneToOne (mappedBy = "envio")
+    @OneToOne
+    @JoinColumn(name="id_venta", nullable=true)
     private Venta venta;
 
     public Envio(){
@@ -29,11 +22,11 @@ public class Envio {
         this.direccionEnvio = direccionEnvio;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

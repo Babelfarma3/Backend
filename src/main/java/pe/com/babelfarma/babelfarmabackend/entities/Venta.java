@@ -17,8 +17,7 @@ public class Venta {
     @JoinColumn(name="id_cliente", nullable=false)
     private Cliente cliente;
 
-    @OneToOne
-    @JoinColumn(name="id_envio", nullable=true)
+    @OneToOne(mappedBy = "venta")
     private Envio envio;
 
     @OneToOne(mappedBy = "venta")
