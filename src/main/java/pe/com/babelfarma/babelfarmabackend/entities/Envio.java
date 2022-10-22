@@ -11,6 +11,9 @@ public class Envio {
     private String encargado;
     private String direccionEnvio;
 
+    @OneToOne (mappedBy = "envio")
+    private Venta venta;
+
     public Envio(){
     }
     public Envio(String encargado, String direccionEnvio) {

@@ -18,6 +18,9 @@ public class Cliente {
     private int celular;
     private Date fechaNacimiento;
 
+    @OneToMany(mappedBy = "cliente")
+    private List<Venta> ventas;
+
     public Cliente() {
     }
 

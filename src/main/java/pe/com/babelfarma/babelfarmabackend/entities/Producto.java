@@ -15,6 +15,8 @@ public class Producto {
     private double precio;
     private String descripcion;
 
+    @OneToMany(mappedBy = "producto")
+    private List<DetalleVenta> detalleVentas;
 
     @ManyToOne
     @JoinColumn(name = "id_categoria", nullable = false)
