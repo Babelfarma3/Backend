@@ -24,11 +24,27 @@ public class ProductoController {
 
     @Autowired
     private ProductoRepository productoRepository;
+
     @GetMapping("/productos")
     public ResponseEntity<List<Producto>> getAllProductos(){
         List<Producto> productos=productoRepository.findAll();
 
         return new ResponseEntity<List<Producto>>(productos, HttpStatus.OK);
+    }
+
+    @PostMapping("/productos")
+    public ResponseEntity<Producto> createProducto(@RequestBody Producto producto){
+        Producto newProducto=
+                productoRepository.save(
+                        new Producto(
+                                producto.getNombre(),
+                                producto.getStock(),
+                                producto.getPrecio(),
+                                producto.getDescripcion(),
+                                producto.getCategoria()
+                        )
+                );
+        return new ResponseEntity<Producto>(newProducto, HttpStatus.CREATED);
     }
 
 }

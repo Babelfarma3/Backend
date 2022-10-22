@@ -21,5 +21,4 @@ public class CategoriaController {
         return new ResponseEntity<List<Categoria>>(categorias, HttpStatus.OK);
     }
 
-
 }
