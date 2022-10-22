@@ -11,7 +11,8 @@ public class Envio {
     private String encargado;
     private String direccionEnvio;
 
-    @OneToOne (mappedBy = "envio")
+    @OneToOne
+    @JoinColumn(name="id_venta", nullable=true)
     private Venta venta;
 
     public Envio(){
