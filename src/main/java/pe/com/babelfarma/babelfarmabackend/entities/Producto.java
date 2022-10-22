@@ -3,6 +3,7 @@ package pe.com.babelfarma.babelfarmabackend.entities;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,14 +20,6 @@ public class Producto {
 
     @OneToMany(mappedBy = "producto")
     private List<DetalleVenta> detalleVentas;
-
-    public List<DetalleVenta> getDetalleVentas() {
-        return detalleVentas;
-    }
-
-    public void setDetalleVentas(List<DetalleVenta> detalleVentas) {
-        this.detalleVentas = detalleVentas;
-    }
 
     @ManyToOne
     @JoinColumn(name = "id_categoria", nullable = false)
@@ -102,5 +95,14 @@ public class Producto {
     public void setFarmacias(List<Farmacia> farmacias) {
         this.farmacias = farmacias;
     }
+
+    public List<DetalleVenta> getDetalleVentas() {
+        return detalleVentas;
+    }
+
+    public void setDetalleVentas(List<DetalleVenta> detalleVentas) {
+        this.detalleVentas = detalleVentas;
+    }
+
 
 }
