@@ -1,4 +1,4 @@
 package pe.com.babelfarma.babelfarmabackend.repository;
 
-public interface CarroComprasRepository {
+public interface RoleRepository {
 }
