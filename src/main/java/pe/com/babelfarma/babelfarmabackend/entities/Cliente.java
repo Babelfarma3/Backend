@@ -9,7 +9,7 @@ import java.util.List;
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private int dni;
     private String nombres;
     private String apellidoPaterno;
@@ -34,11 +34,11 @@ public class Cliente {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

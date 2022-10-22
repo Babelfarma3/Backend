@@ -1,6 +1,9 @@
 package pe.com.babelfarma.babelfarmabackend.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +12,7 @@ import java.util.List;
 public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String nombre;
     private int stock;
     private double precio;
@@ -20,15 +23,11 @@ public class Producto {
 
     @ManyToOne
     @JoinColumn(name = "id_categoria", nullable = false)
-
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) //pa q funcione
     private Categoria categoria;
-
-
 
     @ManyToMany(mappedBy = "productos")
     private List<Farmacia> farmacias = new ArrayList<>();
-
-
 
     public Producto(String nombre, int stock, double precio, String descripcion, Categoria categoria) {
         this.nombre = nombre;
@@ -41,11 +40,11 @@ public class Producto {
     public Producto() {
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -96,5 +95,14 @@ public class Producto {
     public void setFarmacias(List<Farmacia> farmacias) {
         this.farmacias = farmacias;
     }
+
+    public List<DetalleVenta> getDetalleVentas() {
+        return detalleVentas;
+    }
+
+    public void setDetalleVentas(List<DetalleVenta> detalleVentas) {
+        this.detalleVentas = detalleVentas;
+    }
+
 
 }
