@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pe.com.babelfarma.babelfarmabackend.entities.Categoria;
 import pe.com.babelfarma.babelfarmabackend.entities.Producto;
 import pe.com.babelfarma.babelfarmabackend.exception.ResourceNotFoundException;
 import pe.com.babelfarma.babelfarmabackend.repository.ProductoRepository;
@@ -67,12 +68,12 @@ public class ProductoController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/productos/buscardistrito/{distrito}")
-    public ResponseEntity<List<Producto>> getProductosSearch(@PathVariable("distrito") String distrito){
-        List<Producto> productos=productoRepository.findDistritoSQL(distrito);
-
+    @GetMapping("/productos/buscarproducto/{producto}")
+    public ResponseEntity<List<Producto>> getProductosSearch(@PathVariable("producto") String producto){
+        List<Producto> productos=productoRepository.findProductoSQL(producto);
         return new ResponseEntity<List<Producto>>(productos, HttpStatus.OK);
     }
+
 
     @GetMapping("/productos/categorias")
     public ResponseEntity<List<String>> ListarCantProdCategoria(){

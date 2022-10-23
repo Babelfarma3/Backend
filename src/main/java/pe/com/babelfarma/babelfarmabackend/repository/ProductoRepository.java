@@ -1,6 +1,7 @@
 package pe.com.babelfarma.babelfarmabackend.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import pe.com.babelfarma.babelfarmabackend.entities.Categoria;
 import pe.com.babelfarma.babelfarmabackend.entities.Producto;
 
 import java.util.ArrayList;
@@ -8,7 +9,9 @@ import java.util.List;
 
 public interface ProductoRepository extends JpaRepository<Producto, Long>{
     @Query(value="SELECT * FROM productos where nombre like '%'||?1||'%'", nativeQuery = true)
-    List<Producto> findDistritoSQL(String dst);
+    List<Producto> findProductoSQL(String producto);
+
+
 
     @Query("select p.categoria.categoria, p.stock from Producto p join p.categoria c where c.id = p.categoria.id")
     List<String> ListCantProdCategoriaJPQL();
@@ -20,6 +23,6 @@ public interface ProductoRepository extends JpaRepository<Producto, Long>{
     List<Producto> ListProductoPrecioJPQL();
 
     //Reporte de productos mas vendidos
-    
+
 
 }

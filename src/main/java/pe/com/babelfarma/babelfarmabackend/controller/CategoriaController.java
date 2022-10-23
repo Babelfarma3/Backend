@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.com.babelfarma.babelfarmabackend.entities.Categoria;
 import pe.com.babelfarma.babelfarmabackend.repository.CategoriaRepository;
+import pe.com.babelfarma.babelfarmabackend.exception.ResourceNotFoundException;
 
 import java.util.List;
 
@@ -21,6 +22,11 @@ public class CategoriaController {
         return new ResponseEntity<List<Categoria>>(categorias, HttpStatus.OK);
     }
 
+    @GetMapping("/categorias/buscarcategoria/{categoria}")
+    public ResponseEntity<List<Categoria>> getCategoriaSearch(@PathVariable("categoria") String categoria){
+        List<Categoria> categorias = categoriaRepository.findCategoriaSQL(categoria);
+        return new ResponseEntity<List<Categoria>>(categorias, HttpStatus.OK);
+    }
 
 
 }
