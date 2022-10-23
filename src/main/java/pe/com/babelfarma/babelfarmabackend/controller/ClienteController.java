@@ -36,6 +36,16 @@ public class ClienteController {
         List<Cliente> clientes = clienteRepository.findBySexoJPQL(sexo);
         return new ResponseEntity<List<Cliente>>(clientes, HttpStatus.OK);
     }
+    /*
+    @GetMapping("/clientes/{edadMin}-{edadMax}")
+    public ResponseEntity<List<Cliente>> findByEdadSQL(@PathVariable("edadMin") int edadMin, @PathVariable("edadMax") int edadMax){
+        List<Cliente> clientes = clienteRepository.findByEdadJPQL(edadMin, edadMax);
+        if(clientes.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(clientes, HttpStatus.OK);
+    }
+    */
     @PostMapping("/clientes")
     public ResponseEntity<Cliente> createCliente(@RequestBody Cliente cliente){
         Cliente newCliente =
@@ -48,7 +58,8 @@ public class ClienteController {
                         cliente.getCorreo(),
                         cliente.getCelular(),
                         cliente.getFechaNacimiento(),
-                        cliente.getDireccion()
+                        cliente.getDireccion(),
+                        cliente.getDistrito()
                 )
         );
         return new ResponseEntity<Cliente>(newCliente, HttpStatus.CREATED);
@@ -67,6 +78,8 @@ public class ClienteController {
         clienteUpdate.setCorreo(cliente.getCorreo());
         clienteUpdate.setCelular(cliente.getCelular());
         clienteUpdate.setFechaNacimiento(cliente.getFechaNacimiento());
+        clienteUpdate.setDireccion(cliente.getDireccion());
+        clienteUpdate.setDistrito(cliente.getDistrito());
         return new ResponseEntity<Cliente>(clienteRepository.save(clienteUpdate), HttpStatus.OK);
     }
     @DeleteMapping("/clientes/{id}")

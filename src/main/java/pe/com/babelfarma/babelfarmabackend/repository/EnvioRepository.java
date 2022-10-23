@@ -10,6 +10,6 @@ public interface EnvioRepository
     extends JpaRepository<Envio, Long> {
         @Query("SELECT e FROM Envio e WHERE e.id=?1")
         Envio findByIdJPQL(long id);
-        @Query("SELECT e FROM Envio e WHERE e.direccionEnvio=?1")
-        List<Envio> findByDireccionEnvioJPQL(String direccionEnvio);
+        //@Query("SELECT e FROM Envio e WHERE e.direccionEnvio=?1")
+        //List<Envio> findByDireccionEnvioJPQL(String direccionEnvio);
 }

@@ -1,5 +1,7 @@
 package pe.com.babelfarma.babelfarmabackend.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -25,12 +27,13 @@ public class Cliente {
 
     @ManyToOne
     @JoinColumn(name="id_distrito", nullable=false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Distrito distrito;
 
     public Cliente() {
     }
 
-    public Cliente(int dni, String nombres, String apellidoPaterno, String apellidoMaterno, String sexo, String correo, int celular, Date fechaNacimiento, String direccion) {
+    public Cliente(int dni, String nombres, String apellidoPaterno, String apellidoMaterno, String sexo, String correo, int celular, Date fechaNacimiento, String direccion, Distrito distrito) {
         this.dni = dni;
         this.nombres = nombres;
         this.apellidoPaterno = apellidoPaterno;
@@ -40,6 +43,7 @@ public class Cliente {
         this.celular = celular;
         this.fechaNacimiento = fechaNacimiento;
         this.direccion = direccion;
+        this.distrito = distrito;
     }
 
     public List<Venta> getVentas() {

@@ -24,11 +24,13 @@ public class EnvioController {
         Envio envio = envioRepository.findByIdJPQL(id);
         return new ResponseEntity<Envio>(envio, HttpStatus.OK);
     }
+    /*
     @GetMapping("/envios/{direccion}")
     public ResponseEntity<List<Envio>> findByDireccionEnvioJPQL(@PathVariable("direccion") String direccion){
         List<Envio> envios = envioRepository.findByDireccionEnvioJPQL(direccion);
         return new ResponseEntity<List<Envio>>(envios, HttpStatus.OK);
     }
+     */
     @PostMapping("/envios")
     public ResponseEntity<Envio> createEnvio(@RequestBody Envio envio){
         Envio newEnvio =
@@ -36,7 +38,6 @@ public class EnvioController {
                     envio.getNombreEncargado(),
                     envio.getApellidoEncargado(),
                     envio.getCelular(),
-                    envio.getDireccionEnvio(),
                     envio.getVenta()
                 )
         );
@@ -51,7 +52,6 @@ public class EnvioController {
         envioUpdate.setNombreEncargado(envio.getNombreEncargado());
         envioUpdate.setApellidoEncargado(envio.getApellidoEncargado());
         envioUpdate.setCelular(envio.getCelular());
-        envioUpdate.setDireccionEnvio(envio.getDireccionEnvio());
         return new ResponseEntity<Envio>(envioRepository.save(envioUpdate), HttpStatus.OK);
     }
     @DeleteMapping("/envios/{id}")

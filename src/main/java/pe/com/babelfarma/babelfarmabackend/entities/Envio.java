@@ -11,7 +11,6 @@ public class Envio {
     private String nombreEncargado;
     private String apellidoEncargado;
     private int celular;
-    private String direccionEnvio;
 
     @OneToOne
     @JoinColumn(name="id_venta", nullable=true)
@@ -20,11 +19,10 @@ public class Envio {
     public Envio(){
     }
 
-    public Envio(String nombreEncargado, String apellidoEncargado, int celular, String direccionEnvio, Venta venta) {
+    public Envio(String nombreEncargado, String apellidoEncargado, int celular, Venta venta) {
         this.nombreEncargado = nombreEncargado;
         this.apellidoEncargado = apellidoEncargado;
         this.celular = celular;
-        this.direccionEnvio = direccionEnvio;
         this.venta = venta;
     }
 
@@ -66,13 +64,5 @@ public class Envio {
 
     public void setCelular(int celular) {
         this.celular = celular;
-    }
-
-    public String getDireccionEnvio() {
-        return direccionEnvio;
-    }
-
-    public void setDireccionEnvio(String direccionEnvio) {
-        this.direccionEnvio = direccionEnvio;
     }
 }

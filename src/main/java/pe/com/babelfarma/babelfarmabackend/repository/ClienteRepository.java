@@ -14,4 +14,7 @@ public interface ClienteRepository
     Cliente findByDniJPQL(int dni);
     @Query("SELECT c FROM Cliente c WHERE c.sexo=?1")
     List<Cliente> findBySexoJPQL(String sexo);
+    //@Query("SELECT c FROM Cliente c WHERE DATEDIFF(CURRENT_TIMESTAMP(), c.fechaNacimiento) BETWEEN ?1 AND ?2")
+    //@Query(value="SELECT * FROM public.cliente (DATE_PART('year', NOW()) - DATE_PART('year', fecha_nacimiento)) BETWEEN ||?1|| AND ||?2||", nativeQuery=true)
+    //List<Cliente> findByEdadJPQL(int min, int max);
 }
