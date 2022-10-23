@@ -1,5 +1,7 @@
 package pe.com.babelfarma.babelfarmabackend.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -12,9 +14,11 @@ public class Distrito {
     private String nombreDistrito;
 
     @OneToMany(mappedBy="distrito")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Cliente> clientes;
 
     @OneToMany(mappedBy = "distrito")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Farmacia> farmacias;
 
     public Distrito() {

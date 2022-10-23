@@ -23,6 +23,7 @@ public class Cliente {
     private String direccion;
 
     @OneToMany(mappedBy = "cliente")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Venta> ventas;
 
     @ManyToOne
