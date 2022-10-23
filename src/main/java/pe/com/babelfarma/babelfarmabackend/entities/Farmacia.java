@@ -1,5 +1,6 @@
 package pe.com.babelfarma.babelfarmabackend.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.ColumnTransformer;
 
 import javax.persistence.*;
@@ -24,6 +25,7 @@ public class Farmacia {
 
     @ManyToOne
     @JoinColumn(name="id_distrito", nullable=false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Distrito distrito;
 
     @ManyToMany
