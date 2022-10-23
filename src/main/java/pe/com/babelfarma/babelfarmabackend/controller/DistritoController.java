@@ -20,6 +20,11 @@ public class DistritoController {
         List<Distrito> distritos = distritoRepository.findAll();
         return new ResponseEntity<List<Distrito>>(distritos, HttpStatus.OK);
     }
+    @GetMapping("/distritos/{id}")
+    public ResponseEntity<Distrito> findById(@PathVariable("id") Long id){
+        Distrito distrito = distritoRepository.findByIdJPQL(id);
+        return new ResponseEntity<Distrito>(distrito, HttpStatus.OK);
+    }
     @PostMapping("/distritos")
     private ResponseEntity<Distrito> createDistrito(@RequestBody Distrito distrito){
         Distrito newDistrito =
