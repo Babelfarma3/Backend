@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pe.com.babelfarma.babelfarmabackend.entities.DetalleVenta;
+import pe.com.babelfarma.babelfarmabackend.exception.ResourceNotFoundException;
 import pe.com.babelfarma.babelfarmabackend.repository.VentaRepository;
 import pe.com.babelfarma.babelfarmabackend.entities.Venta;
 
@@ -32,8 +34,22 @@ public class VentaController {
     }
 
     //put
-
+    @PutMapping("/ventas/{id}")
+    public ResponseEntity<Venta> updateVenta(
+            @PathVariable("id") Long id,
+            @RequestBody Venta venta){
+        Venta ventaUpdate = ventaRepository.findById(id)
+                .orElseThrow(()->new ResourceNotFoundException("No se encontró el cliente con id: " + id));
+        ventaUpdate.setFecha(venta.getFecha());
+        return new ResponseEntity<Venta>(ventaRepository.save(ventaUpdate), HttpStatus.OK);
+    }
     //deletee
+    @DeleteMapping("/ventas/{id}")
+    public ResponseEntity<HttpStatus> deleteVenta(@PathVariable("id") Long id){
+        ventaRepository.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
 }
 
 

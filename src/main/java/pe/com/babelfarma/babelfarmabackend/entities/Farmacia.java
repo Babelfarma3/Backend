@@ -1,5 +1,6 @@
 package pe.com.babelfarma.babelfarmabackend.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.ColumnTransformer;
 
 import javax.persistence.*;
@@ -24,6 +25,7 @@ public class Farmacia {
 
     @ManyToOne
     @JoinColumn(name="id_distrito", nullable=false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Distrito distrito;
 
     @ManyToMany
@@ -39,12 +41,13 @@ public class Farmacia {
     public Farmacia() {
     }
 
-    public Farmacia(int RUC, String nombreEstablecimiento, String direccion, String correoContato, int telefonoContacto) {
+    public Farmacia(int RUC, String nombreEstablecimiento, String direccion, String correoContato, int telefonoContacto, Distrito distrito) {
         this.RUC = RUC;
         this.nombreEstablecimiento = nombreEstablecimiento;
         this.direccion = direccion;
         this.correoContato = correoContato;
         this.telefonoContacto = telefonoContacto;
+        this.distrito = distrito;
     }
 
     public Long getId() {

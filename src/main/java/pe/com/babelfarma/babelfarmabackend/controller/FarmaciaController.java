@@ -33,12 +33,12 @@ public class FarmaciaController {
         return new ResponseEntity<Farmacia>(farmacia, HttpStatus.OK);
     }
 
-    @GetMapping("/farmacias/buscardistrito/{distrito}")
-    public ResponseEntity<List<Farmacia>> findByDistrito(
-            @PathVariable("distrito") String distrito
+    @GetMapping("/farmacias/buscardireccion/{direccion}")
+    public ResponseEntity<List<Farmacia>> findByDireccion(
+            @PathVariable("direccion") String direccion
     ){
 
-        List<Farmacia> farmacias = farmaciaRepository.findByDistritoContainingSQL(distrito);
+        List<Farmacia> farmacias = farmaciaRepository.findByDireccionContainingSQL(direccion);
 
         return new ResponseEntity<List<Farmacia>>(farmacias, HttpStatus.OK);
     }
@@ -53,6 +53,26 @@ public class FarmaciaController {
         return new ResponseEntity<List<Farmacia>>(farmacias, HttpStatus.OK);
     }
 
+    @GetMapping("/farmacias/buscarpordistrito/{distrito}")
+    public ResponseEntity<List<Farmacia>> findByDistrito(
+            @PathVariable("distrito") String distrito
+    ){
+
+        List<Farmacia> farmacias = farmaciaRepository.findByDistritoContainingJPQL(distrito);
+
+        return new ResponseEntity<List<Farmacia>>(farmacias, HttpStatus.OK);
+    }
+
+    @GetMapping("/farmacias/productos")
+    public ResponseEntity<List<String>> findProductosByStock(){
+
+        List<String> farmacias = farmaciaRepository.findProducsByStock();
+
+        return new ResponseEntity<List<String>>(farmacias, HttpStatus.OK);
+    }
+
+
+
     @PostMapping("/farmacias")
     public ResponseEntity<Farmacia> createFarmacia(@RequestBody Farmacia farmacia){
         Farmacia newFarmacia =
@@ -61,7 +81,8 @@ public class FarmaciaController {
                         farmacia.getNombreEstablecimiento(),
                         farmacia.getDireccion(),
                         farmacia.getCorreoContato(),
-                        farmacia.getTelefonoContacto()
+                        farmacia.getTelefonoContacto(),
+                        farmacia.getDistrito()
                         )
                 );
         return new ResponseEntity<Farmacia>(newFarmacia, HttpStatus.CREATED);
@@ -77,6 +98,7 @@ public class FarmaciaController {
         farmaciaUpdate.setDireccion(farmacia.getDireccion());
         farmaciaUpdate.setCorreoContato(farmacia.getCorreoContato());
         farmaciaUpdate.setTelefonoContacto(farmacia.getTelefonoContacto());
+        farmaciaUpdate.setDistrito(farmacia.getDistrito());
 
         return new ResponseEntity<Farmacia>(farmaciaRepository.save(farmaciaUpdate), HttpStatus.OK);
     }
