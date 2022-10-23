@@ -22,6 +22,10 @@ public class Farmacia {
     @OneToMany(mappedBy = "farmacia")
     private List<Venta> ventas;
 
+    @ManyToOne
+    @JoinColumn(name="id_distrito", nullable=false)
+    private Distrito distrito;
+
     @ManyToMany
             @JoinTable(name = "farmacias_productos",
                     joinColumns = @JoinColumn(name = "farmacia_id", referencedColumnName = "id", nullable = false),
@@ -73,6 +77,18 @@ public class Farmacia {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public List<Venta> getVentas() {
+        return ventas;
+    }
+
+    public Distrito getDistrito() {
+        return distrito;
+    }
+
+    public void setDistrito(Distrito distrito) {
+        this.distrito = distrito;
     }
 
     public String getCorreoContato() {

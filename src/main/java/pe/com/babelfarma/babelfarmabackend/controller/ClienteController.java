@@ -47,7 +47,8 @@ public class ClienteController {
                         cliente.getSexo(),
                         cliente.getCorreo(),
                         cliente.getCelular(),
-                        cliente.getFechaNacimiento()
+                        cliente.getFechaNacimiento(),
+                        cliente.getDireccion()
                 )
         );
         return new ResponseEntity<Cliente>(newCliente, HttpStatus.CREATED);

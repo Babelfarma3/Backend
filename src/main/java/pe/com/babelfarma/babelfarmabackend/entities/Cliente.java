@@ -18,14 +18,19 @@ public class Cliente {
     private String correo;
     private int celular;
     private Date fechaNacimiento;
+    private String direccion;
 
     @OneToMany(mappedBy = "cliente")
     private List<Venta> ventas;
 
+    @ManyToOne
+    @JoinColumn(name="id_distrito", nullable=false)
+    private Distrito distrito;
+
     public Cliente() {
     }
 
-    public Cliente(int dni, String nombres, String apellidoPaterno, String apellidoMaterno, String sexo, String correo, int celular, Date fechaNacimiento) {
+    public Cliente(int dni, String nombres, String apellidoPaterno, String apellidoMaterno, String sexo, String correo, int celular, Date fechaNacimiento, String direccion) {
         this.dni = dni;
         this.nombres = nombres;
         this.apellidoPaterno = apellidoPaterno;
@@ -34,10 +39,27 @@ public class Cliente {
         this.correo = correo;
         this.celular = celular;
         this.fechaNacimiento = fechaNacimiento;
+        this.direccion = direccion;
     }
 
     public List<Venta> getVentas() {
         return ventas;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public Distrito getDistrito() {
+        return distrito;
+    }
+
+    public void setDistrito(Distrito distrito) {
+        this.distrito = distrito;
     }
 
     public void setVentas(List<Venta> ventas) {
