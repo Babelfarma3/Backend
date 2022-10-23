@@ -25,6 +25,24 @@ public class FarmaciaController {
         return new ResponseEntity<List<Farmacia>>(farmacias, HttpStatus.OK);
     }
 
+    @GetMapping("/farmacias/buscarid/{buscarid}")
+    public ResponseEntity<Farmacia> findById(
+            @PathVariable("buscarid") Long id){
+       Farmacia farmacia = farmaciaRepository.findByIdJPQL(id);
+
+        return new ResponseEntity<Farmacia>(farmacia, HttpStatus.OK);
+    }
+
+    @GetMapping("/farmacias/buscardistrito/{distrito}")
+    public ResponseEntity<List<Farmacia>> findByDistrito(
+            @PathVariable("distrito") String distrito
+    ){
+
+        List<Farmacia> farmacias = farmaciaRepository.findByDistritoContainingSQL(distrito);
+
+        return new ResponseEntity<List<Farmacia>>(farmacias, HttpStatus.OK);
+    }
+
     @PostMapping("/farmacias")
     public ResponseEntity<Farmacia> createFarmacia(@RequestBody Farmacia farmacia){
         Farmacia newFarmacia =
