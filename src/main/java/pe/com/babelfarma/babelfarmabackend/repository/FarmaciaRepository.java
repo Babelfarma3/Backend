@@ -10,7 +10,7 @@ public interface FarmaciaRepository extends JpaRepository<Farmacia, Long> {
 
 
   @Query("SELECT f FROM Farmacia f WHERE f.id = ?1")
-  Farmacia findByIdJPQL(long id);
+  Farmacia findByIdJPQL(Long id);
 
   @Query(value = "SELECT * FROM farmacias WHERE direccion LIKE '%'||?1||'%'", nativeQuery = true)
   List<Farmacia> findByDistritoContainingSQL(String distrito);
