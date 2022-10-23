@@ -9,6 +9,7 @@ import pe.com.babelfarma.babelfarmabackend.repository.ClienteRepository;
 import pe.com.babelfarma.babelfarmabackend.entities.Cliente;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -18,6 +19,21 @@ public class ClienteController {
     @GetMapping("/clientes")
     public ResponseEntity<List<Cliente>> getAllClientes(){
         List<Cliente> clientes = clienteRepository.findAll();
+        return new ResponseEntity<List<Cliente>>(clientes, HttpStatus.OK);
+    }
+    @GetMapping("/clientes/id/{id}")
+    public ResponseEntity<Cliente> findById(@PathVariable("id") Long id){
+        Cliente cliente = clienteRepository.findByIdJPQL(id);
+        return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
+    }
+    @GetMapping("/clientes/dni/{dni}")
+    public ResponseEntity<Cliente> findByDNINum(@PathVariable("dni") int dni){
+        Cliente cliente = clienteRepository.findByDniJPQL(dni);
+        return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
+    }
+    @GetMapping("/clientes/sexo/{sexo}")
+    public ResponseEntity<List<Cliente>> findBySexo(@PathVariable("sexo") String sexo){
+        List<Cliente> clientes = clienteRepository.findBySexoJPQL(sexo);
         return new ResponseEntity<List<Cliente>>(clientes, HttpStatus.OK);
     }
     @PostMapping("/clientes")
