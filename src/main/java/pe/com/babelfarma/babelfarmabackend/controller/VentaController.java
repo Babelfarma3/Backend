@@ -30,6 +30,10 @@ public class VentaController {
         );
         return new ResponseEntity<Venta>(newVenta, HttpStatus.CREATED);
     }
+
+    //put
+
+    //deletee
 }
 
 
