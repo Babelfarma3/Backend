@@ -43,6 +43,16 @@ public class FarmaciaController {
         return new ResponseEntity<List<Farmacia>>(farmacias, HttpStatus.OK);
     }
 
+    @GetMapping("/farmacias/buscarnombrefarmacia/{nombre}")
+    public ResponseEntity<List<Farmacia>> findByNombreEstablecimiento(
+            @PathVariable("nombre") String nombreEstablecimiento
+    ){
+
+        List<Farmacia> farmacias = farmaciaRepository.findByNombreEstablecimientoContainingSQL(nombreEstablecimiento);
+
+        return new ResponseEntity<List<Farmacia>>(farmacias, HttpStatus.OK);
+    }
+
     @PostMapping("/farmacias")
     public ResponseEntity<Farmacia> createFarmacia(@RequestBody Farmacia farmacia){
         Farmacia newFarmacia =

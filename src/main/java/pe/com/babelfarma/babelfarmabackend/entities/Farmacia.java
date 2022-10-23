@@ -1,5 +1,7 @@
 package pe.com.babelfarma.babelfarmabackend.entities;
 
+import org.hibernate.annotations.ColumnTransformer;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +13,9 @@ public class Farmacia {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int RUC;
+
     private String nombreEstablecimiento;
+
     private String direccion;
     private String correoContato;
     private int telefonoContacto;
