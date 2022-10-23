@@ -3,7 +3,6 @@ package pe.com.babelfarma.babelfarmabackend.entities;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 

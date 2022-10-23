@@ -1,7 +1,5 @@
 package pe.com.babelfarma.babelfarmabackend.entities;
 
-import org.hibernate.annotations.ManyToAny;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -17,6 +15,10 @@ public class Venta {
     @JoinColumn(name="id_cliente", nullable=false)
     private Cliente cliente;
 
+    @ManyToOne
+    @JoinColumn(name="id_farmacia", nullable=false)
+    private Farmacia farmacia;
+
     @OneToOne(mappedBy = "venta")
     private Envio envio;
 
@@ -26,9 +28,41 @@ public class Venta {
     public Venta(){
     }
 
-    public Venta(Date fecha, Cliente cliente) {
+    public Venta(Date fecha, Cliente cliente, Farmacia farmacia) {
         this.fecha = fecha;
         this.cliente = cliente;
+        this.farmacia = farmacia;
+    }
+
+    public Farmacia getFarmacia() {
+        return farmacia;
+    }
+
+    public Long getFarmaciaId(){
+        return farmacia.getId();
+    }
+
+    public void setFarmacia(Farmacia farmacia) {
+        this.farmacia = farmacia;
+    }
+
+    public Envio getEnvio() {
+        return envio;
+    }
+
+    public Long getEnvioId(){
+        return envio.getId();
+    }
+    public void setEnvio(Envio envio) {
+        this.envio = envio;
+    }
+
+    public DetalleVenta getDetalleVenta() {
+        return detalleVenta;
+    }
+
+    public void setDetalleVenta(DetalleVenta detalleVenta) {
+        this.detalleVenta = detalleVenta;
     }
 
     public Long getId() {

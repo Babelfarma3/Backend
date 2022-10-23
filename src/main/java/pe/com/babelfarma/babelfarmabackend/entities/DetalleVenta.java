@@ -1,7 +1,6 @@
 package pe.com.babelfarma.babelfarmabackend.entities;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name="detalle_venta")

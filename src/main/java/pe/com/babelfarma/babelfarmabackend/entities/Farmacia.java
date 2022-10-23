@@ -15,12 +15,18 @@ public class Farmacia {
     private String direccion;
     private String correoContato;
     private int telefonoContacto;
+    @OneToMany(mappedBy = "farmacia")
+    private List<Venta> ventas;
 
     @ManyToMany
             @JoinTable(name = "farmacias_productos",
                     joinColumns = @JoinColumn(name = "farmacia_id", referencedColumnName = "id", nullable = false),
                     inverseJoinColumns = @JoinColumn(name = "producto_id", referencedColumnName = "id",nullable = false))
     List<Producto> productos = new ArrayList<>();
+
+    public void setVentas(List<Venta> ventas) {
+        this.ventas = ventas;
+    }
 
     public Farmacia() {
     }

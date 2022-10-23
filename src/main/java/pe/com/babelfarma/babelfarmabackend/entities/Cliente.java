@@ -14,6 +14,7 @@ public class Cliente {
     private String nombres;
     private String apellidoPaterno;
     private String apellidoMaterno;
+    private String sexo;
     private String correo;
     private int celular;
     private Date fechaNacimiento;
@@ -24,14 +25,23 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(int dni, String nombres, String apellidoPaterno, String apellidoMaterno, String correo, int celular, Date fechaNacimiento) {
+    public Cliente(int dni, String nombres, String apellidoPaterno, String apellidoMaterno, String sexo, String correo, int celular, Date fechaNacimiento) {
         this.dni = dni;
         this.nombres = nombres;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
+        this.sexo = sexo;
         this.correo = correo;
         this.celular = celular;
         this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public List<Venta> getVentas() {
+        return ventas;
+    }
+
+    public void setVentas(List<Venta> ventas) {
+        this.ventas = ventas;
     }
 
     public Long getId() {
@@ -72,6 +82,14 @@ public class Cliente {
 
     public void setApellidoMaterno(String apellidoMaterno) {
         this.apellidoMaterno = apellidoMaterno;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
 
     public String getCorreo() {
