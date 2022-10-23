@@ -34,7 +34,7 @@ public class DetalleVentaController {
     }
     //put
     @PutMapping("/detallesVenta/{id}")
-    public ResponseEntity<DetalleVenta> updateCliente(
+    public ResponseEntity<DetalleVenta> updateDetalleVenta(
             @PathVariable("id") Long id,
             @RequestBody DetalleVenta detalleVenta){
         DetalleVenta detalleVentaUpdate = detalleVentaRepository.findById(id)
