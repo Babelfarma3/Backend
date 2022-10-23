@@ -7,31 +7,65 @@ import javax.persistence.*;
 public class Envio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String encargado;
+    private Long id;
+    private String nombreEncargado;
+    private String apellidoEncargado;
+    private int celular;
     private String direccionEnvio;
+
+    @OneToOne
+    @JoinColumn(name="id_venta", nullable=true)
+    private Venta venta;
 
     public Envio(){
     }
-    public Envio(String encargado, String direccionEnvio) {
-        this.encargado = encargado;
+
+    public Envio(String nombreEncargado, String apellidoEncargado, int celular, String direccionEnvio, Venta venta) {
+        this.nombreEncargado = nombreEncargado;
+        this.apellidoEncargado = apellidoEncargado;
+        this.celular = celular;
         this.direccionEnvio = direccionEnvio;
+        this.venta = venta;
     }
 
-    public int getId() {
+    public Venta getVenta() {
+        return venta;
+    }
+
+    public void setVenta(Venta venta) {
+        this.venta = venta;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getEncargado() {
-        return encargado;
+    public String getNombreEncargado() {
+        return nombreEncargado;
     }
 
-    public void setEncargado(String encargado) {
-        this.encargado = encargado;
+    public void setNombreEncargado(String nombreEncargado) {
+        this.nombreEncargado = nombreEncargado;
+    }
+
+    public String getApellidoEncargado() {
+        return apellidoEncargado;
+    }
+
+    public void setApellidoEncargado(String apellidoEncargado) {
+        this.apellidoEncargado = apellidoEncargado;
+    }
+
+    public int getCelular() {
+        return celular;
+    }
+
+    public void setCelular(int celular) {
+        this.celular = celular;
     }
 
     public String getDireccionEnvio() {

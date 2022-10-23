@@ -9,33 +9,46 @@ import java.util.List;
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private int dni;
     private String nombres;
     private String apellidoPaterno;
     private String apellidoMaterno;
+    private String sexo;
     private String correo;
     private int celular;
     private Date fechaNacimiento;
 
+    @OneToMany(mappedBy = "cliente")
+    private List<Venta> ventas;
+
     public Cliente() {
     }
 
-    public Cliente(int dni, String nombres, String apellidoPaterno, String apellidoMaterno, String correo, int celular, Date fechaNacimiento) {
+    public Cliente(int dni, String nombres, String apellidoPaterno, String apellidoMaterno, String sexo, String correo, int celular, Date fechaNacimiento) {
         this.dni = dni;
         this.nombres = nombres;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
+        this.sexo = sexo;
         this.correo = correo;
         this.celular = celular;
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public int getId() {
+    public List<Venta> getVentas() {
+        return ventas;
+    }
+
+    public void setVentas(List<Venta> ventas) {
+        this.ventas = ventas;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -69,6 +82,14 @@ public class Cliente {
 
     public void setApellidoMaterno(String apellidoMaterno) {
         this.apellidoMaterno = apellidoMaterno;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
 
     public String getCorreo() {

@@ -1,5 +1,7 @@
 package pe.com.babelfarma.babelfarmabackend.entities;
 
+import org.hibernate.annotations.ColumnTransformer;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,18 +11,26 @@ import java.util.List;
 public class Farmacia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private int RUC;
+
     private String nombreEstablecimiento;
+
     private String direccion;
     private String correoContato;
     private int telefonoContacto;
+    @OneToMany(mappedBy = "farmacia")
+    private List<Venta> ventas;
 
     @ManyToMany
             @JoinTable(name = "farmacias_productos",
                     joinColumns = @JoinColumn(name = "farmacia_id", referencedColumnName = "id", nullable = false),
                     inverseJoinColumns = @JoinColumn(name = "producto_id", referencedColumnName = "id",nullable = false))
     List<Producto> productos = new ArrayList<>();
+
+    public void setVentas(List<Venta> ventas) {
+        this.ventas = ventas;
+    }
 
     public Farmacia() {
     }
@@ -33,11 +43,11 @@ public class Farmacia {
         this.telefonoContacto = telefonoContacto;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
