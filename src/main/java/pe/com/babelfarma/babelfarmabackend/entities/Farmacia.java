@@ -41,12 +41,13 @@ public class Farmacia {
     public Farmacia() {
     }
 
-    public Farmacia(int RUC, String nombreEstablecimiento, String direccion, String correoContato, int telefonoContacto) {
+    public Farmacia(int RUC, String nombreEstablecimiento, String direccion, String correoContato, int telefonoContacto, Distrito distrito) {
         this.RUC = RUC;
         this.nombreEstablecimiento = nombreEstablecimiento;
         this.direccion = direccion;
         this.correoContato = correoContato;
         this.telefonoContacto = telefonoContacto;
+        this.distrito = distrito;
     }
 
     public Long getId() {

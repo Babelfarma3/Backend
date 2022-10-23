@@ -81,7 +81,8 @@ public class FarmaciaController {
                         farmacia.getNombreEstablecimiento(),
                         farmacia.getDireccion(),
                         farmacia.getCorreoContato(),
-                        farmacia.getTelefonoContacto()
+                        farmacia.getTelefonoContacto(),
+                        farmacia.getDistrito()
                         )
                 );
         return new ResponseEntity<Farmacia>(newFarmacia, HttpStatus.CREATED);
@@ -97,6 +98,7 @@ public class FarmaciaController {
         farmaciaUpdate.setDireccion(farmacia.getDireccion());
         farmaciaUpdate.setCorreoContato(farmacia.getCorreoContato());
         farmaciaUpdate.setTelefonoContacto(farmacia.getTelefonoContacto());
+        farmaciaUpdate.setDistrito(farmacia.getDistrito());
 
         return new ResponseEntity<Farmacia>(farmaciaRepository.save(farmaciaUpdate), HttpStatus.OK);
     }
