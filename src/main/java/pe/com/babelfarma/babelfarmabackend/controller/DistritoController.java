@@ -38,5 +38,10 @@ public class DistritoController {
         distritoUpdate.setNombreDistrito(distrito.getNombreDistrito());
         return new ResponseEntity<Distrito>(distritoRepository.save(distritoUpdate), HttpStatus.OK);
     }
+    @DeleteMapping("distritos/{id}")
+    public ResponseEntity<HttpStatus> deleteDistrito(@PathVariable("id") Long id){
+        distritoRepository.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
 }
