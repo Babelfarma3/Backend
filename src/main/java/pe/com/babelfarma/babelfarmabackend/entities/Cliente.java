@@ -22,6 +22,10 @@ public class Cliente {
     private Date fechaNacimiento;
     private String direccion;
 
+    @OneToOne
+    @JoinColumn(name = "id_usuario", nullable = false)
+    private Usuario usuario;
+
     @ManyToOne
     @JoinColumn(name="id_distrito", nullable=false)
     private Distrito distrito;

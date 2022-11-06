@@ -19,11 +19,6 @@ public class Venta {
     @JoinColumn(name="id_farmacia", nullable=false)
     private Farmacia farmacia;
 
-    @OneToOne(mappedBy = "venta")
-    private Envio envio;
-
-    @OneToOne(mappedBy = "venta")
-    private DetalleVenta detalleVenta;
 
     public Venta(){
     }
@@ -44,25 +39,6 @@ public class Venta {
 
     public void setFarmacia(Farmacia farmacia) {
         this.farmacia = farmacia;
-    }
-
-    public Envio getEnvio() {
-        return envio;
-    }
-
-    public Long getEnvioId(){
-        return envio.getId();
-    }
-    public void setEnvio(Envio envio) {
-        this.envio = envio;
-    }
-
-    public DetalleVenta getDetalleVenta() {
-        return detalleVenta;
-    }
-
-    public void setDetalleVenta(DetalleVenta detalleVenta) {
-        this.detalleVenta = detalleVenta;
     }
 
     public Long getId() {
