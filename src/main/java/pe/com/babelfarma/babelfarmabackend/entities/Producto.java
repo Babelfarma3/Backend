@@ -22,7 +22,6 @@ public class Producto {
 
     @ManyToOne
     @JoinColumn(name = "id_categoria", nullable = false)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) //pa q funcione
     private Categoria categoria;
 
     @ManyToMany(mappedBy = "productos")

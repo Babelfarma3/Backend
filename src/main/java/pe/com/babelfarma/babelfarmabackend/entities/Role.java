@@ -13,8 +13,6 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String role;
-    @OneToMany(mappedBy = "role")
-    private List<Usuario> usuarios;
 
     public Role(){}
 

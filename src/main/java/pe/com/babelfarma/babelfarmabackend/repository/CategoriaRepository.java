@@ -9,4 +9,6 @@ import java.util.List;
 public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
     @Query(value="SELECT * FROM categorias where categoria like '%'||?1||'%'", nativeQuery = true)
     List<Categoria> findCategoriaSQL(String aux);
+
+   Categoria getCategoriaById(Long id);
 }

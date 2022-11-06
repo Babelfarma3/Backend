@@ -22,13 +22,8 @@ public class Cliente {
     private Date fechaNacimiento;
     private String direccion;
 
-    @OneToMany(mappedBy = "cliente")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private List<Venta> ventas;
-
     @ManyToOne
     @JoinColumn(name="id_distrito", nullable=false)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Distrito distrito;
 
     public Cliente() {
@@ -47,9 +42,6 @@ public class Cliente {
         this.distrito = distrito;
     }
 
-    public List<Venta> getVentas() {
-        return ventas;
-    }
 
     public String getDireccion() {
         return direccion;
@@ -67,9 +59,6 @@ public class Cliente {
         this.distrito = distrito;
     }
 
-    public void setVentas(List<Venta> ventas) {
-        this.ventas = ventas;
-    }
 
     public Long getId() {
         return id;

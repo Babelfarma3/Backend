@@ -5,6 +5,29 @@ import javax.persistence.*;
 @Entity
 @Table(name="detalle_venta")
 public class DetalleVenta {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private int cantidad;
+    private double precioUnit;
+    private double precioTotal;
+
+    @OneToOne
+    @JoinColumn(name="id_venta", nullable=false)
+    private Venta venta;
+
+    @ManyToOne
+    @JoinColumn(name="id_producto", nullable=false)
+    private Producto producto;
+
+    public DetalleVenta(){
+    }
+    public DetalleVenta(int cantidad, double precioUnit, double precioTotal) {
+        this.cantidad = cantidad;
+        this.precioUnit = precioUnit;
+        this.precioTotal = precioTotal;
+    }
+
     public Long getId() {
         return id;
     }
@@ -29,28 +52,6 @@ public class DetalleVenta {
         this.producto = producto;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private int cantidad;
-    private double precioUnit;
-    private double precioTotal;
-
-    @OneToOne
-    @JoinColumn(name="id_venta", nullable=false)
-    private Venta venta;
-
-    @ManyToOne
-    @JoinColumn(name="id_producto", nullable=false)
-    private Producto producto;
-
-    public DetalleVenta(){
-    }
-    public DetalleVenta(int cantidad, double precioUnit, double precioTotal) {
-        this.cantidad = cantidad;
-        this.precioUnit = precioUnit;
-        this.precioTotal = precioTotal;
-    }
 
     public int getCantidad() {
         return cantidad;

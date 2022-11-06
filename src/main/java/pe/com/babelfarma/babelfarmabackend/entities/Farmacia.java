@@ -29,10 +29,9 @@ public class Farmacia {
     private Distrito distrito;
 
     @ManyToMany
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @JoinTable(name = "farmacias_productos",
-            joinColumns = @JoinColumn(name = "farmacia_id", referencedColumnName = "id", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "producto_id", referencedColumnName = "id",nullable = false))
+            @JoinTable(name = "farmacias_productos",
+                    joinColumns = @JoinColumn(name = "farmacia_id", referencedColumnName = "id", nullable = false),
+                    inverseJoinColumns = @JoinColumn(name = "producto_id", referencedColumnName = "id",nullable = false))
     List<Producto> productos = new ArrayList<>();
 
     public void setVentas(List<Venta> ventas) {

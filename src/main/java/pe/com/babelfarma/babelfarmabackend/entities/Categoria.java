@@ -10,9 +10,6 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String categoria;
-    @OneToMany(mappedBy = "categoria", fetch = FetchType.LAZY)
-    private List<Producto> productos;
-
 
     public Categoria(){
 
@@ -37,11 +34,4 @@ public class Categoria {
         this.categoria = categoria;
     }
 
-    public List<Producto> getProductos() {
-        return productos;
-    }
-
-    public void setProductos(List<Producto> productos) {
-        this.productos = productos;
-    }
 }
