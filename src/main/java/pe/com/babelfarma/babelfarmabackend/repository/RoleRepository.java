@@ -8,7 +8,7 @@ import pe.com.babelfarma.babelfarmabackend.entities.Usuario;
 public interface RoleRepository
     extends JpaRepository<Role, Long> {
     @Query("SELECT r FROM Role r WHERE r.id=?1")
-    Usuario findByIdJPQL(long id);
+    Role findByIdJPQL(long id);
     @Query("SELECT r FROM Role r WHERE r.role=?1")
-    Usuario findByRoleJPQL(String role);
+    Role findByRoleJPQL(String role);
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pe.com.babelfarma.babelfarmabackend.entities.Cliente;
 import pe.com.babelfarma.babelfarmabackend.entities.Role;
 import pe.com.babelfarma.babelfarmabackend.repository.RoleRepository;
 
@@ -19,6 +20,11 @@ public class RoleController {
     public ResponseEntity<List<Role>> getAllRoles(){
         List<Role> roles = roleRepository.findAll();
         return new ResponseEntity<List<Role>>(roles, HttpStatus.OK);
+    }
+    @GetMapping("/roles/{id}")
+    public ResponseEntity<Role> findById(@PathVariable("id") Long id){
+        Role role = roleRepository.findByIdJPQL(id);
+        return new ResponseEntity<Role>(role, HttpStatus.OK);
     }
     @PostMapping("/roles")
     public ResponseEntity<Role> createRole(@RequestBody Role role){
