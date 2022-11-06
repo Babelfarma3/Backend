@@ -34,6 +34,10 @@ public class Farmacia {
                     inverseJoinColumns = @JoinColumn(name = "producto_id", referencedColumnName = "id",nullable = false))
     List<Producto> productos = new ArrayList<>();
 
+    @OneToOne
+    @JoinColumn(name = "id_usuario", nullable = false)
+    private Usuario usuario;
+
     public void setVentas(List<Venta> ventas) {
         this.ventas = ventas;
     }
