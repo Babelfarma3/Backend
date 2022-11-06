@@ -17,15 +17,10 @@ public class Producto {
     private double precio;
     private String descripcion;
 
-    @OneToMany(mappedBy = "producto", cascade = {CascadeType.ALL})
-    private List<DetalleVenta> detalleVentas;
 
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "id_categoria", nullable = false)
     private Categoria categoria;
-
-    @ManyToMany(mappedBy = "productos", cascade = {CascadeType.ALL})
-    private List<Farmacia> farmacias = new ArrayList<>();
 
     public Producto(String nombre, int stock, double precio, String descripcion, Categoria categoria) {
         this.nombre = nombre;
@@ -86,21 +81,6 @@ public class Producto {
         this.categoria = categoria;
     }
 
-    public List<Farmacia> getFarmacias() {
-        return farmacias;
-    }
-
-    public void setFarmacias(List<Farmacia> farmacias) {
-        this.farmacias = farmacias;
-    }
-
-    public List<DetalleVenta> getDetalleVentas() {
-        return detalleVentas;
-    }
-
-    public void setDetalleVentas(List<DetalleVenta> detalleVentas) {
-        this.detalleVentas = detalleVentas;
-    }
 
 
 }

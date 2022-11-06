@@ -20,12 +20,9 @@ public class Farmacia {
     private String direccion;
     private String correoContato;
     private int telefonoContacto;
-    @OneToMany(mappedBy = "farmacia", cascade = {CascadeType.ALL})
-    private List<Venta> ventas;
 
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name="id_distrito", nullable=false)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Distrito distrito;
 
     @ManyToMany(cascade = {CascadeType.ALL})
@@ -38,9 +35,6 @@ public class Farmacia {
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
-    public void setVentas(List<Venta> ventas) {
-        this.ventas = ventas;
-    }
 
     public Farmacia() {
     }
@@ -86,9 +80,6 @@ public class Farmacia {
         this.direccion = direccion;
     }
 
-    public List<Venta> getVentas() {
-        return ventas;
-    }
 
     public Distrito getDistrito() {
         return distrito;
