@@ -10,6 +10,7 @@ import pe.com.babelfarma.babelfarmabackend.repository.DistritoRepository;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api")
 public class DistritoController {

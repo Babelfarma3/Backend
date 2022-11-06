@@ -10,6 +10,7 @@ import pe.com.babelfarma.babelfarmabackend.entities.DetalleVenta;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api")
 public class DetalleVentaController {
