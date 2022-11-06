@@ -12,11 +12,11 @@ public class DetalleVenta {
     private double precioUnit;
     private double precioTotal;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name="id_venta", nullable=false)
     private Venta venta;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name="id_producto", nullable=false)
     private Producto producto;
 

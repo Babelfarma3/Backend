@@ -17,14 +17,14 @@ public class Producto {
     private double precio;
     private String descripcion;
 
-    @OneToMany(mappedBy = "producto")
+    @OneToMany(mappedBy = "producto", cascade = {CascadeType.ALL})
     private List<DetalleVenta> detalleVentas;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "id_categoria", nullable = false)
     private Categoria categoria;
 
-    @ManyToMany(mappedBy = "productos")
+    @ManyToMany(mappedBy = "productos", cascade = {CascadeType.ALL})
     private List<Farmacia> farmacias = new ArrayList<>();
 
     public Producto(String nombre, int stock, double precio, String descripcion, Categoria categoria) {

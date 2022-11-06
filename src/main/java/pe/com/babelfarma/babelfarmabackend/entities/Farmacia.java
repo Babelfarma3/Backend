@@ -20,21 +20,21 @@ public class Farmacia {
     private String direccion;
     private String correoContato;
     private int telefonoContacto;
-    @OneToMany(mappedBy = "farmacia")
+    @OneToMany(mappedBy = "farmacia", cascade = {CascadeType.ALL})
     private List<Venta> ventas;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name="id_distrito", nullable=false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Distrito distrito;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
             @JoinTable(name = "farmacias_productos",
                     joinColumns = @JoinColumn(name = "farmacia_id", referencedColumnName = "id", nullable = false),
                     inverseJoinColumns = @JoinColumn(name = "producto_id", referencedColumnName = "id",nullable = false))
     List<Producto> productos = new ArrayList<>();
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 

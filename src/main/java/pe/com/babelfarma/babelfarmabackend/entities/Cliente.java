@@ -22,11 +22,11 @@ public class Cliente {
     private Date fechaNacimiento;
     private String direccion;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name="id_distrito", nullable=false)
     private Distrito distrito;
 

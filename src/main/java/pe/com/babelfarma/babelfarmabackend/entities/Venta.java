@@ -11,11 +11,11 @@ public class Venta {
     private Long id;
     private Date fecha;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name="id_cliente", nullable=false)
     private Cliente cliente;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name="id_farmacia", nullable=false)
     private Farmacia farmacia;
 
