@@ -12,7 +12,7 @@ public class Envio {
     private String apellidoEncargado;
     private int celular;
 
-    @OneToOne(cascade = {CascadeType.ALL})
+    @OneToOne
     @JoinColumn(name="id_venta", nullable=true)
     private Venta venta;
 

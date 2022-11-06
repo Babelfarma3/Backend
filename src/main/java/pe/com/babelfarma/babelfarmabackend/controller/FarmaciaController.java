@@ -83,7 +83,9 @@ public class FarmaciaController {
                         farmacia.getDireccion(),
                         farmacia.getCorreoContato(),
                         farmacia.getTelefonoContacto(),
-                        farmacia.getDistrito()
+                        farmacia.getDistrito(),
+                        farmacia.getRole(),
+                        farmacia.getContraseña()
                         )
                 );
         return new ResponseEntity<Farmacia>(newFarmacia, HttpStatus.CREATED);

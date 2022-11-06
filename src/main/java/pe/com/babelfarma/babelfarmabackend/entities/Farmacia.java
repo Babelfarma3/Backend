@@ -21,31 +21,37 @@ public class Farmacia {
     private String correoContato;
     private int telefonoContacto;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    private String contraseña;
+
+    @OneToOne
+    @JoinColumn(name = "id_role", nullable =false)
+    private Role role;
+
+    @ManyToOne
     @JoinColumn(name="id_distrito", nullable=false)
     private Distrito distrito;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany
             @JoinTable(name = "farmacias_productos",
                     joinColumns = @JoinColumn(name = "farmacia_id", referencedColumnName = "id", nullable = false),
                     inverseJoinColumns = @JoinColumn(name = "producto_id", referencedColumnName = "id",nullable = false))
     List<Producto> productos = new ArrayList<>();
 
-    @OneToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "id_usuario", nullable = false)
-    private Usuario usuario;
 
 
     public Farmacia() {
     }
 
-    public Farmacia(int RUC, String nombreEstablecimiento, String direccion, String correoContato, int telefonoContacto, Distrito distrito) {
+    public Farmacia(int RUC, String nombreEstablecimiento, String direccion, String correoContato, int telefonoContacto, Distrito distrito,
+                    Role role, String contraseña) {
         this.RUC = RUC;
         this.nombreEstablecimiento = nombreEstablecimiento;
         this.direccion = direccion;
         this.correoContato = correoContato;
         this.telefonoContacto = telefonoContacto;
         this.distrito = distrito;
+        this.role=role;
+        this.contraseña=contraseña;
     }
 
     public Long getId() {
@@ -54,6 +60,22 @@ public class Farmacia {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public int getRUC() {

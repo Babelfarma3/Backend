@@ -60,7 +60,9 @@ public class ClienteController {
                         cliente.getCelular(),
                         cliente.getFechaNacimiento(),
                         cliente.getDireccion(),
-                        cliente.getDistrito()
+                        cliente.getDistrito(),
+                        cliente.getRole(),
+                        cliente.getContraseña()
                 )
         );
         return new ResponseEntity<Cliente>(newCliente, HttpStatus.CREATED);

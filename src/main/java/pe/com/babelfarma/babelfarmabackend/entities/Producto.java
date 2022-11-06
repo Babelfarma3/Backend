@@ -18,7 +18,7 @@ public class Producto {
     private String descripcion;
 
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne
     @JoinColumn(name = "id_categoria", nullable = false)
     private Categoria categoria;
 
