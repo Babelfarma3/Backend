@@ -35,6 +35,13 @@ public class ProductoController {
         return new ResponseEntity<List<Producto>>(productos, HttpStatus.OK);
     }
 
+    @GetMapping("/productos/id/{id}")
+    public ResponseEntity<Producto> getById(@PathVariable("id") Long id){
+        Producto producto = productoRepository.FindById(id);
+        return new ResponseEntity<Producto>(producto, HttpStatus.OK);
+    }
+
+
     @PostMapping("/productos")
     public ResponseEntity<Producto> createProducto(@RequestBody Producto producto){
         Producto newProducto=
@@ -49,6 +56,9 @@ public class ProductoController {
                 );
         return new ResponseEntity<Producto>(newProducto, HttpStatus.CREATED);
     }
+    //llamo a createProducto
+    //ultimo codigo del producto ingresado
+    //crear un api de muchos a muchos
 
     @PutMapping("/productos/{id}")
     public ResponseEntity<Producto> updateProducto(@PathVariable("id") Long id,
