@@ -13,12 +13,16 @@ public class Farmacia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int RUC;
+    private int ruc;
+
+    private String nombresDuenio;
+
+    private String apellidosDuenio;
 
     private String nombreEstablecimiento;
 
     private String direccion;
-    private String correoContato;
+    private String correoContacto;
     private int telefonoContacto;
 
     private String contraseña;
@@ -42,16 +46,34 @@ public class Farmacia {
     public Farmacia() {
     }
 
-    public Farmacia(int RUC, String nombreEstablecimiento, String direccion, String correoContato, int telefonoContacto, Distrito distrito,
+    public Farmacia(int ruc, String nombresDuenio, String apellidosDuenio, String nombreEstablecimiento, String direccion, String correoContacto, int telefonoContacto, Distrito distrito,
                     Role role, String contraseña) {
-        this.RUC = RUC;
+        this.ruc = ruc;
+        this.nombresDuenio = nombresDuenio;
+        this.apellidosDuenio = apellidosDuenio;
         this.nombreEstablecimiento = nombreEstablecimiento;
         this.direccion = direccion;
-        this.correoContato = correoContato;
+        this.correoContacto = correoContacto;
         this.telefonoContacto = telefonoContacto;
         this.distrito = distrito;
         this.role=role;
         this.contraseña=contraseña;
+    }
+
+    public String getNombresDuenio() {
+        return nombresDuenio;
+    }
+
+    public void setNombresDuenio(String nombresDuenio) {
+        this.nombresDuenio = nombresDuenio;
+    }
+
+    public String getApellidosDuenio() {
+        return apellidosDuenio;
+    }
+
+    public void setApellidosDuenio(String apellidosDuenio) {
+        this.apellidosDuenio = apellidosDuenio;
     }
 
     public Long getId() {
@@ -78,12 +100,12 @@ public class Farmacia {
         this.role = role;
     }
 
-    public int getRUC() {
-        return RUC;
+    public int getRuc() {
+        return ruc;
     }
 
-    public void setRUC(int RUC) {
-        this.RUC = RUC;
+    public void setRuc(int ruc) {
+        this.ruc = ruc;
     }
 
     public String getNombreEstablecimiento() {
@@ -111,12 +133,12 @@ public class Farmacia {
         this.distrito = distrito;
     }
 
-    public String getCorreoContato() {
-        return correoContato;
+    public String getCorreoContacto() {
+        return correoContacto;
     }
 
-    public void setCorreoContato(String correoContato) {
-        this.correoContato = correoContato;
+    public void setCorreoContacto(String correoContacto) {
+        this.correoContacto = correoContacto;
     }
 
     public int getTelefonoContacto() {
@@ -139,10 +161,12 @@ public class Farmacia {
     public String toString() {
         return "Farmacia{" +
                 "id=" + id +
-                ", RUC=" + RUC +
+                ", ruc=" + ruc +
+                ", nombresDuenio" + nombresDuenio + '\'' +
+                ", apellidosDuenio" + apellidosDuenio + '\'' +
                 ", nombreEstablecimiento='" + nombreEstablecimiento + '\'' +
                 ", direccion='" + direccion + '\'' +
-                ", correoContato='" + correoContato + '\'' +
+                ", correoContacto='" + correoContacto + '\'' +
                 ", telefonoContacto=" + telefonoContacto +
                 '}';
     }
