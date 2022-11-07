@@ -22,7 +22,6 @@ public class FarmaciaController {
     @GetMapping("/farmacias")
     public ResponseEntity<List<Farmacia>> getAllFarmacias(){
         List<Farmacia> farmacias = farmaciaRepository.findAll();
-
         return new ResponseEntity<List<Farmacia>>(farmacias, HttpStatus.OK);
     }
 
@@ -78,10 +77,12 @@ public class FarmaciaController {
     public ResponseEntity<Farmacia> createFarmacia(@RequestBody Farmacia farmacia){
         Farmacia newFarmacia =
                 farmaciaRepository.save(new Farmacia(
-                        farmacia.getRUC(),
+                        farmacia.getRuc(),
+                        farmacia.getNombresDuenio(),
+                        farmacia.getApellidosDuenio(),
                         farmacia.getNombreEstablecimiento(),
                         farmacia.getDireccion(),
-                        farmacia.getCorreoContato(),
+                        farmacia.getCorreoContacto(),
                         farmacia.getTelefonoContacto(),
                         farmacia.getDistrito(),
                         farmacia.getRole(),
@@ -96,10 +97,10 @@ public class FarmaciaController {
             @RequestBody Farmacia farmacia){
         Farmacia farmaciaUpdate = farmaciaRepository.findById(id)
                 .orElseThrow(()->new ResourceNotFoundException("No se encontró el cliente con id: " + id));
-        farmaciaUpdate.setRUC(farmacia.getRUC());
+        farmaciaUpdate.setRuc(farmacia.getRuc());
         farmaciaUpdate.setNombreEstablecimiento(farmacia.getNombreEstablecimiento());
         farmaciaUpdate.setDireccion(farmacia.getDireccion());
-        farmaciaUpdate.setCorreoContato(farmacia.getCorreoContato());
+        farmaciaUpdate.setCorreoContacto(farmacia.getCorreoContacto());
         farmaciaUpdate.setTelefonoContacto(farmacia.getTelefonoContacto());
         farmaciaUpdate.setDistrito(farmacia.getDistrito());
 
