@@ -83,6 +83,8 @@ public class ClienteController {
         clienteUpdate.setFechaNacimiento(cliente.getFechaNacimiento());
         clienteUpdate.setDireccion(cliente.getDireccion());
         clienteUpdate.setDistrito(cliente.getDistrito());
+        clienteUpdate.setRole(cliente.getRole());
+        clienteUpdate.setContraseña(cliente.getContraseña());
         return new ResponseEntity<Cliente>(clienteRepository.save(clienteUpdate), HttpStatus.OK);
     }
     @DeleteMapping("/clientes/{id}")
