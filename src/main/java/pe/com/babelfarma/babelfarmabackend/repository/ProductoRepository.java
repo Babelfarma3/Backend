@@ -11,7 +11,8 @@ public interface ProductoRepository extends JpaRepository<Producto, Long>{
     @Query(value="SELECT * FROM productos where nombre like '%'||?1||'%'", nativeQuery = true)
     List<Producto> findProductoSQL(String producto);
 
-
+    @Query("select p from Producto p where p.id=?1")
+    Producto getById(Long id);
 
     @Query("select p.categoria.categoria, p.stock from Producto p join p.categoria c where c.id = p.categoria.id")
     List<String> ListCantProdCategoriaJPQL();

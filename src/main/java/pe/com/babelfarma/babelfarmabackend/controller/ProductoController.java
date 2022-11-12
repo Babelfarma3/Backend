@@ -35,6 +35,13 @@ public class ProductoController {
         return new ResponseEntity<List<Producto>>(productos, HttpStatus.OK);
     }
 
+    @GetMapping("/productos/id/{id}")
+    public ResponseEntity<Producto> getProductoById(@PathVariable("id") Long id){
+        Producto producto=productoRepository.getById(id);
+
+        return new ResponseEntity<Producto>(producto, HttpStatus.OK);
+    }
+
     @PostMapping("/productos")
     public ResponseEntity<Producto> createProducto(@RequestBody Producto producto){
         Producto newProducto=
