@@ -30,8 +30,14 @@ public class ProductoController {
 
     @GetMapping("/productos")
     public ResponseEntity<List<Producto>> getAllProductos(){
-        List<Producto> productos=productoRepository.ListProductoPrecioJPQL();
+        List<Producto> productos=productoRepository.findAll();
 
+        return new ResponseEntity<List<Producto>>(productos, HttpStatus.OK);
+    }
+
+    @GetMapping("/productos/precio")
+    public ResponseEntity<List<Producto>> getProductosPrecio(){
+        List<Producto> productos=productoRepository.ListProductoPrecioJPQL();
         return new ResponseEntity<List<Producto>>(productos, HttpStatus.OK);
     }
 
@@ -95,10 +101,6 @@ public class ProductoController {
         return new ResponseEntity<List<Producto>>(productos, HttpStatus.OK);
     }
 
-    @GetMapping("/productos/precio")
-    public ResponseEntity<List<Producto>> getProductosPrecio(){
-        List<Producto> productos=productoRepository.ListProductoPrecioJPQL();
-        return new ResponseEntity<List<Producto>>(productos, HttpStatus.OK);
-    }
+
 
 }
