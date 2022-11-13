@@ -9,7 +9,10 @@ import java.util.List;
 
 public interface ProductoRepository extends JpaRepository<Producto, Long>{
     @Query(value="SELECT * FROM productos where nombre like '%'||?1||'%'", nativeQuery = true)
-    List<Producto> findProductoSQL(String producto);
+    List<Producto> findProductoByNameSQL(String producto);
+
+    @Query("select p from Producto p where p.categoria.categoria = ?1")
+    List<Producto> findProductoByCategoria(String categoria);
 
     @Query("select p from Producto p where p.id=?1")
     Producto getById(Long id);

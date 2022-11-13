@@ -30,7 +30,7 @@ public class ProductoController {
 
     @GetMapping("/productos")
     public ResponseEntity<List<Producto>> getAllProductos(){
-        List<Producto> productos=productoRepository.findAll();
+        List<Producto> productos=productoRepository.ListProductoPrecioJPQL();
 
         return new ResponseEntity<List<Producto>>(productos, HttpStatus.OK);
     }
@@ -76,17 +76,17 @@ public class ProductoController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/productos/buscarproducto/{producto}")
-    public ResponseEntity<List<Producto>> getProductosSearch(@PathVariable("producto") String producto){
-        List<Producto> productos=productoRepository.findProductoSQL(producto);
+    @GetMapping("/productos/nombre/{producto}")
+    public ResponseEntity<List<Producto>> getProductosSearch(@PathVariable("producto") String p){
+        List<Producto> productos=productoRepository.findProductoByNameSQL(p);
         return new ResponseEntity<List<Producto>>(productos, HttpStatus.OK);
     }
 
 
-    @GetMapping("/productos/categorias")
-    public ResponseEntity<List<String>> ListarCantProdCategoria(){
-        List<String> productos=productoRepository.ListCantProdCategoriaJPQL();
-        return new ResponseEntity<List<String>>(productos, HttpStatus.OK);
+    @GetMapping("/productos/categoria/{categoria}")
+    public ResponseEntity<List<Producto>> ListarPorCategoria(@PathVariable("categoria") String c){
+        List<Producto> productos=productoRepository.findProductoByCategoria(c);
+        return new ResponseEntity<List<Producto>>(productos, HttpStatus.OK);
     }
 
     @GetMapping("/productos/stock")
