@@ -6,8 +6,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.com.babelfarma.babelfarmabackend.entities.Categoria;
+import pe.com.babelfarma.babelfarmabackend.entities.FarmaciaProducto;
 import pe.com.babelfarma.babelfarmabackend.entities.Producto;
 import pe.com.babelfarma.babelfarmabackend.exception.ResourceNotFoundException;
+import pe.com.babelfarma.babelfarmabackend.repository.FarmaciaProductoRepository;
 import pe.com.babelfarma.babelfarmabackend.repository.ProductoRepository;
 
 import java.util.List;
@@ -27,6 +29,8 @@ public class ProductoController {
 
     @Autowired
     private ProductoRepository productoRepository;
+    @Autowired
+    private FarmaciaProductoRepository farmaciaProductoRepository;
 
     @GetMapping("/productos")
     public ResponseEntity<List<Producto>> getAllProductos(){
@@ -48,8 +52,10 @@ public class ProductoController {
         return new ResponseEntity<Producto>(producto, HttpStatus.OK);
     }
 
-    @PostMapping("/productos")
-    public ResponseEntity<Producto> createProducto(@RequestBody Producto producto){
+    @PostMapping("/productosregistrados/{idFarmacia}")
+    public ResponseEntity<Producto> createProducto(
+            @PathVariable("idFarmacia") Long idFarmacia,
+            @RequestBody Producto producto){
         Producto newProducto=
                 productoRepository.save(
                         new Producto(
@@ -60,6 +66,13 @@ public class ProductoController {
                                 producto.getCategoria()
                         )
                 );
+        farmaciaProductoRepository.save(
+                new FarmaciaProducto(
+                        idFarmacia,
+                        newProducto.getId()
+                )
+        );
+
         return new ResponseEntity<Producto>(newProducto, HttpStatus.CREATED);
     }
 

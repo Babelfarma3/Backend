@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.Query;
 import pe.com.babelfarma.babelfarmabackend.entities.Categoria;
 import pe.com.babelfarma.babelfarmabackend.entities.Producto;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +26,7 @@ public interface ProductoRepository extends JpaRepository<Producto, Long>{
 
     @Query("select p from Producto p order by p.precio asc")
     List<Producto> ListProductoPrecioJPQL();
+
 
     //Reporte de productos mas vendidos
 
