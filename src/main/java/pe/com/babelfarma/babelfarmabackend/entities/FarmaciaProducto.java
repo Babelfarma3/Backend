@@ -1,5 +1,7 @@
 package pe.com.babelfarma.babelfarmabackend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
