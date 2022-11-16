@@ -30,6 +30,10 @@ public class Producto {
         this.categoria = categoria;
     }
 
+    @OneToMany(mappedBy = "productoId",
+            cascade = {CascadeType.ALL}, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<FarmaciaProducto> productos;
+
     public Producto() {
     }
 

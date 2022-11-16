@@ -25,6 +25,15 @@ public class FarmaciaController {
         return new ResponseEntity<List<Farmacia>>(farmacias, HttpStatus.OK);
     }
 
+    @GetMapping("/farmacias/buscarporcorreo/{correo}/{contraseña}")
+    public ResponseEntity<Farmacia> findByCorreoYContraseña(
+            @PathVariable("correo") String correoContacto,  @PathVariable("contraseña") String contraseña){
+        Farmacia farmacia = farmaciaRepository.findByCorreoYContraseña(correoContacto,contraseña);
+
+        return new ResponseEntity<Farmacia>(farmacia, HttpStatus.OK);
+    }
+
+
     @GetMapping("/farmacias/buscarid/{buscarid}")
     public ResponseEntity<Farmacia> findById(
             @PathVariable("buscarid") Long id){

@@ -6,8 +6,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.com.babelfarma.babelfarmabackend.entities.Categoria;
+import pe.com.babelfarma.babelfarmabackend.entities.FarmaciaProducto;
 import pe.com.babelfarma.babelfarmabackend.entities.Producto;
 import pe.com.babelfarma.babelfarmabackend.exception.ResourceNotFoundException;
+import pe.com.babelfarma.babelfarmabackend.repository.FarmaciaProductoRepository;
 import pe.com.babelfarma.babelfarmabackend.repository.ProductoRepository;
 
 import java.util.List;
@@ -27,6 +29,8 @@ public class ProductoController {
 
     @Autowired
     private ProductoRepository productoRepository;
+    @Autowired
+    private FarmaciaProductoRepository farmaciaProductoRepository;
 
     @GetMapping("/productos")
     public ResponseEntity<List<Producto>> getAllProductos(){
@@ -35,8 +39,23 @@ public class ProductoController {
         return new ResponseEntity<List<Producto>>(productos, HttpStatus.OK);
     }
 
-    @PostMapping("/productos")
-    public ResponseEntity<Producto> createProducto(@RequestBody Producto producto){
+    @GetMapping("/productos/precio")
+    public ResponseEntity<List<Producto>> getProductosPrecio(){
+        List<Producto> productos=productoRepository.ListProductoPrecioJPQL();
+        return new ResponseEntity<List<Producto>>(productos, HttpStatus.OK);
+    }
+
+    @GetMapping("/productos/id/{id}")
+    public ResponseEntity<Producto> getProductoById(@PathVariable("id") Long id){
+        Producto producto=productoRepository.getById(id);
+
+        return new ResponseEntity<Producto>(producto, HttpStatus.OK);
+    }
+
+    @PostMapping("/productosregistrados/{idFarmacia}")
+    public ResponseEntity<Producto> createProducto(
+            @PathVariable("idFarmacia") Long idFarmacia,
+            @RequestBody Producto producto){
         Producto newProducto=
                 productoRepository.save(
                         new Producto(
@@ -47,6 +66,13 @@ public class ProductoController {
                                 producto.getCategoria()
                         )
                 );
+        farmaciaProductoRepository.save(
+                new FarmaciaProducto(
+                        idFarmacia,
+                        newProducto.getId()
+                )
+        );
+
         return new ResponseEntity<Producto>(newProducto, HttpStatus.CREATED);
     }
 
@@ -69,17 +95,17 @@ public class ProductoController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/productos/buscarproducto/{producto}")
-    public ResponseEntity<List<Producto>> getProductosSearch(@PathVariable("producto") String producto){
-        List<Producto> productos=productoRepository.findProductoSQL(producto);
+    @GetMapping("/productos/nombre/{producto}")
+    public ResponseEntity<List<Producto>> getProductosSearch(@PathVariable("producto") String p){
+        List<Producto> productos=productoRepository.findProductoByNameSQL(p);
         return new ResponseEntity<List<Producto>>(productos, HttpStatus.OK);
     }
 
 
-    @GetMapping("/productos/categorias")
-    public ResponseEntity<List<String>> ListarCantProdCategoria(){
-        List<String> productos=productoRepository.ListCantProdCategoriaJPQL();
-        return new ResponseEntity<List<String>>(productos, HttpStatus.OK);
+    @GetMapping("/productos/categoria/{categoria}")
+    public ResponseEntity<List<Producto>> ListarPorCategoria(@PathVariable("categoria") String c){
+        List<Producto> productos=productoRepository.findProductoByCategoria(c);
+        return new ResponseEntity<List<Producto>>(productos, HttpStatus.OK);
     }
 
     @GetMapping("/productos/stock")
@@ -88,10 +114,6 @@ public class ProductoController {
         return new ResponseEntity<List<Producto>>(productos, HttpStatus.OK);
     }
 
-    @GetMapping("/productos/precio")
-    public ResponseEntity<List<Producto>> getProductosPrecio(){
-        List<Producto> productos=productoRepository.ListProductoPrecioJPQL();
-        return new ResponseEntity<List<Producto>>(productos, HttpStatus.OK);
-    }
+
 
 }
