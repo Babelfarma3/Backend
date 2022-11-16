@@ -25,11 +25,10 @@ public class FarmaciaController {
         return new ResponseEntity<List<Farmacia>>(farmacias, HttpStatus.OK);
     }
 
-    @GetMapping("/farmacias/buscarporcorreo/{correo}/{contraseña}")
+    @GetMapping("/farmacias/buscarporcorreo/{correo}")
     public ResponseEntity<Farmacia> findByCorreoYContraseña(
-            @PathVariable("correo") String correoContacto,  @PathVariable("contraseña") String contraseña){
-        Farmacia farmacia = farmaciaRepository.findByCorreoYContraseña(correoContacto,contraseña);
-
+            @PathVariable("correo") String correoContacto){
+        Farmacia farmacia = farmaciaRepository.findByCorreoYContraseña(correoContacto);
         return new ResponseEntity<Farmacia>(farmacia, HttpStatus.OK);
     }
 
@@ -107,11 +106,15 @@ public class FarmaciaController {
         Farmacia farmaciaUpdate = farmaciaRepository.findById(id)
                 .orElseThrow(()->new ResourceNotFoundException("No se encontró el cliente con id: " + id));
         farmaciaUpdate.setRuc(farmacia.getRuc());
+        farmaciaUpdate.setNombresDuenio(farmacia.getNombresDuenio());
+        farmaciaUpdate.setApellidosDuenio(farmacia.getApellidosDuenio());
         farmaciaUpdate.setNombreEstablecimiento(farmacia.getNombreEstablecimiento());
         farmaciaUpdate.setDireccion(farmacia.getDireccion());
         farmaciaUpdate.setCorreoContacto(farmacia.getCorreoContacto());
         farmaciaUpdate.setTelefonoContacto(farmacia.getTelefonoContacto());
         farmaciaUpdate.setDistrito(farmacia.getDistrito());
+        farmaciaUpdate.setContraseña(farmaciaUpdate.getContraseña());
+        farmaciaUpdate.setRole(farmacia.getRole());
 
         return new ResponseEntity<Farmacia>(farmaciaRepository.save(farmaciaUpdate), HttpStatus.OK);
     }
@@ -120,6 +123,9 @@ public class FarmaciaController {
         farmaciaRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+
+
 
 
 }
