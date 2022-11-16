@@ -51,20 +51,20 @@ public class ClienteController {
     public ResponseEntity<Cliente> createCliente(@RequestBody Cliente cliente){
         Cliente newCliente =
                 clienteRepository.save(new Cliente(
-                        cliente.getDni(),
-                        cliente.getNombres(),
-                        cliente.getApellidoPaterno(),
-                        cliente.getApellidoMaterno(),
-                        cliente.getSexo(),
-                        cliente.getCorreo(),
-                        cliente.getCelular(),
-                        cliente.getFechaNacimiento(),
-                        cliente.getDireccion(),
-                        cliente.getDistrito(),
-                        cliente.getRole(),
-                        cliente.getContraseña()
-                )
-        );
+                                cliente.getDni(),
+                                cliente.getNombres(),
+                                cliente.getApellidoPaterno(),
+                                cliente.getApellidoMaterno(),
+                                cliente.getSexo(),
+                                cliente.getCorreo(),
+                                cliente.getCelular(),
+                                cliente.getFechaNacimiento(),
+                                cliente.getDireccion(),
+                                cliente.getDistrito(),
+                                cliente.getRole(),
+                                cliente.getContraseña()
+                        )
+                );
         return new ResponseEntity<Cliente>(newCliente, HttpStatus.CREATED);
     }
     @PutMapping("/clientes/{id}")

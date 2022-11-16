@@ -26,7 +26,9 @@ public interface FarmaciaRepository extends JpaRepository<Farmacia, Long> {
   List<String> findProducsByStock();
 
 
-  @Query("SELECT f FROM Farmacia f WHERE f.correoContacto=?1 and f.contraseña= ?2")
-  Farmacia findByCorreoYContraseña(String correo,String contraseña);
+  @Query("SELECT f FROM Farmacia f WHERE f.correoContacto=?1")
+  Farmacia findByCorreoYContraseña(String correo);
+
+
 
 }

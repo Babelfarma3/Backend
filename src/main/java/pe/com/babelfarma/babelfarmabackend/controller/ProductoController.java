@@ -12,6 +12,7 @@ import pe.com.babelfarma.babelfarmabackend.exception.ResourceNotFoundException;
 import pe.com.babelfarma.babelfarmabackend.repository.FarmaciaProductoRepository;
 import pe.com.babelfarma.babelfarmabackend.repository.ProductoRepository;
 
+import javax.sound.sampled.Port;
 import java.util.List;
 
 
@@ -114,6 +115,12 @@ public class ProductoController {
         return new ResponseEntity<List<Producto>>(productos, HttpStatus.OK);
     }
 
+
+    @GetMapping("/productos/farmacia/{id}")
+    public ResponseEntity<List<Producto>> getProductoFarmacia(@PathVariable("id")long id){
+        List<Producto> productos=productoRepository.ListarProductoCadaFarmacia(id);
+        return new ResponseEntity<List<Producto>>(productos, HttpStatus.OK);
+    }
 
 
 }
