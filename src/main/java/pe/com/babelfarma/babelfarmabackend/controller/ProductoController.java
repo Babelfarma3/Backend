@@ -1,10 +1,10 @@
 package pe.com.babelfarma.babelfarmabackend.controller;
 
 
-import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import pe.com.babelfarma.babelfarmabackend.entities.Categoria;
@@ -16,8 +16,6 @@ import pe.com.babelfarma.babelfarmabackend.repository.ProductoRepository;
 import pe.com.babelfarma.babelfarmabackend.util.Util;
 import pe.com.babelfarma.babelfarmabackend.repository.CategoriaRepository;
 
-import javax.sound.sampled.Port;
-import javax.transaction.Transactional;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -187,6 +185,7 @@ public class ProductoController {
         return new ResponseEntity<List<Producto>>(productos, HttpStatus.OK);
     }
 
+    @Transactional(readOnly=true)
     @GetMapping("/productos/farmacia/{id}")
     public ResponseEntity<List<Producto>> getProductoFarmacia(@PathVariable("id")long id){
         List<Producto> productos= new ArrayList<>();

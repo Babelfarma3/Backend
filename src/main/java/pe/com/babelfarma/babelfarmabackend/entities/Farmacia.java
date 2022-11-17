@@ -1,5 +1,6 @@
 package pe.com.babelfarma.babelfarmabackend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.ColumnTransformer;
 
@@ -34,7 +35,8 @@ public class Farmacia {
     @ManyToOne
     @JoinColumn(name="id_distrito", nullable=false)
     private Distrito distrito;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+
+    @JsonIgnore
     @ManyToMany
             @JoinTable(name = "farmacias_productos",
                     joinColumns = @JoinColumn(name = "farmacia_id", referencedColumnName = "id", nullable = false),
