@@ -59,6 +59,8 @@ public class ProductoController {
         //List<Producto> productos=productoRepository.findAll();
         return new ResponseEntity<List<Producto>>(productos, HttpStatus.OK);
     }
+
+    @Transactional(readOnly=true)
     @GetMapping("/productos/precio")
     public ResponseEntity<List<Producto>> getProductosPrecio(){
 
