@@ -34,4 +34,6 @@ public interface ProductoRepository extends JpaRepository<Producto, Long>{
     @Query(value="select * from productos a inner join farmacias_productos b on a.id = b.producto_id inner join farmacias c on b.farmacia_id = c.id where c.id=?1", nativeQuery = true)
     List<Producto> ListarProductoCadaFarmacia(long id);
 
+    
+
 }

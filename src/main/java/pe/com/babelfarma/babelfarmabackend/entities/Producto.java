@@ -17,6 +17,18 @@ public class Producto {
     private double precio;
     private String descripcion;
 
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @Column( name ="picture")
+    private byte[] picture;
+
+    public byte[] getPicture() {
+        return picture;
+    }
+
+    public void setPicture(byte[] picture) {
+        this.picture = picture;
+    }
 
     @ManyToOne
     @JoinColumn(name = "id_categoria", nullable = false)

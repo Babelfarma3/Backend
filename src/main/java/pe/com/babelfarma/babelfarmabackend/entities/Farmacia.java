@@ -34,7 +34,7 @@ public class Farmacia {
     @ManyToOne
     @JoinColumn(name="id_distrito", nullable=false)
     private Distrito distrito;
-
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToMany
             @JoinTable(name = "farmacias_productos",
                     joinColumns = @JoinColumn(name = "farmacia_id", referencedColumnName = "id", nullable = false),
