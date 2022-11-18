@@ -69,6 +69,7 @@ public class ProductoController {
 
         productosAux=productoRepository.ListProductoPrecioJPQL();
 
+
         if(productosAux.size()>0){
             productosAux.stream().forEach((p)->{
                 byte[]imageDescompressed = Util.decompressZLib(p.getPicture());
@@ -168,16 +169,40 @@ public class ProductoController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @Transactional(readOnly=true)
     @GetMapping("/productos/nombre/{producto}")
     public ResponseEntity<List<Producto>> getProductosSearch(@PathVariable("producto") String p){
-        List<Producto> productos=productoRepository.findProductoByNameSQL(p);
+        List<Producto> productos= new ArrayList<>();
+        List<Producto> productosAux = new ArrayList<>();
+
+        productosAux=productoRepository.findProductoByNameSQL(p);
+
+        if(productosAux.size()>0){
+            productosAux.stream().forEach((producto)->{
+                byte[]imageDescompressed = Util.decompressZLib(producto.getPicture());
+                producto.setPicture(imageDescompressed);
+                productos.add(producto);
+            });
+        }
         return new ResponseEntity<List<Producto>>(productos, HttpStatus.OK);
     }
 
 
+    @Transactional(readOnly=true)
     @GetMapping("/productos/categoria/{categoria}")
     public ResponseEntity<List<Producto>> ListarPorCategoria(@PathVariable("categoria") String c){
-        List<Producto> productos=productoRepository.findProductoByCategoria(c);
+        List<Producto> productos= new ArrayList<>();
+        List<Producto> productosAux = new ArrayList<>();
+
+        productosAux=productoRepository.findProductoByCategoria(c);
+
+        if(productosAux.size()>0){
+            productosAux.stream().forEach((p)->{
+                byte[]imageDescompressed = Util.decompressZLib(p.getPicture());
+                p.setPicture(imageDescompressed);
+                productos.add(p);
+            });
+        }
         return new ResponseEntity<List<Producto>>(productos, HttpStatus.OK);
     }
 
