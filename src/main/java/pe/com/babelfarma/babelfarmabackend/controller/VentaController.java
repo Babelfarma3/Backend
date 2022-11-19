@@ -22,18 +22,15 @@ public class VentaController {
         List<Venta> ventas = ventaRepository.findAll();
         return new ResponseEntity<List<Venta>>(ventas, HttpStatus.OK);
     }
-    @PostMapping("/ventas/{idCliente}/farmacia/{idFarmacia}")
-    public ResponseEntity<Venta> createVenta(
-            @PathVariable("idCliente") Long idCliente,
-            @PathVariable("idFarmacia") Long idFarmacia,
-            @RequestBody Venta venta){
+    @PostMapping("/ventas")
+    public ResponseEntity<Venta> createVenta(@RequestBody Venta venta){
         Venta newVenta =
                 ventaRepository.save(new Venta(
-                        venta.getFecha(),
-                        venta.getCliente(),
-                        venta.getFarmacia()
-                )
-        );
+                                venta.getFecha(),
+                                venta.getCliente(),
+                                venta.getFarmacia()
+                        )
+                );
         return new ResponseEntity<Venta>(newVenta, HttpStatus.CREATED);
     }
 
