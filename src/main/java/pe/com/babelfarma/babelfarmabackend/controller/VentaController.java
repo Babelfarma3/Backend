@@ -22,8 +22,11 @@ public class VentaController {
         List<Venta> ventas = ventaRepository.findAll();
         return new ResponseEntity<List<Venta>>(ventas, HttpStatus.OK);
     }
-    @PostMapping("/ventas")
-    public ResponseEntity<Venta> createVenta(@RequestBody Venta venta){
+    @PostMapping("/ventas/{idCliente}/farmacia/{idFarmacia}")
+    public ResponseEntity<Venta> createVenta(
+            @PathVariable("idCliente") Long idCliente,
+            @PathVariable("idFarmacia") Long idFarmacia,
+            @RequestBody Venta venta){
         Venta newVenta =
                 ventaRepository.save(new Venta(
                         venta.getFecha(),
