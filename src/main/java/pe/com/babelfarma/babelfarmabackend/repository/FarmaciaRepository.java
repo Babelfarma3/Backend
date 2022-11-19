@@ -31,7 +31,7 @@ public interface FarmaciaRepository extends JpaRepository<Farmacia, Long> {
   Farmacia findByCorreoYContraseña(String correo);
 
 
-  @Query(value="select f.nombre_establecimiento from farmacias f inner join farmacias_productos fp on f.id = fp.farmacia_id inner join productos p on fp.producto_id = p.id where p.id=?1", nativeQuery = true)
-  String farmaciaPorProducto(Long id);
+  @Query(value="select * from farmacias f inner join farmacias_productos fp on f.id = fp.farmacia_id inner join productos p on fp.producto_id = p.id where p.id=?1", nativeQuery = true)
+  Farmacia farmaciaPorProducto(Long id);
 
 }
