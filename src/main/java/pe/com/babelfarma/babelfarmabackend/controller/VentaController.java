@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pe.com.babelfarma.babelfarmabackend.entities.DetalleVenta;
 import pe.com.babelfarma.babelfarmabackend.exception.ResourceNotFoundException;
 import pe.com.babelfarma.babelfarmabackend.repository.VentaRepository;
 import pe.com.babelfarma.babelfarmabackend.entities.Venta;
@@ -28,10 +27,15 @@ public class VentaController {
                 ventaRepository.save(new Venta(
                                 venta.getFecha(),
                                 venta.getCliente(),
-                                venta.getFarmacia()
+                                venta.getFarmacia(),
+                                venta.getProducto(),
+                                venta.getPrecioUnit(),
+                                venta.getCantidad(),
+                                venta.getPrecioTotal()
                         )
                 );
         return new ResponseEntity<Venta>(newVenta, HttpStatus.CREATED);
+
     }
 
     //put
