@@ -28,10 +28,10 @@ public class FarmaciaController {
 
 
     @GetMapping("/farmacias/buscarporproducto/{id}")
-    public ResponseEntity<String> findByProducto(
+    public ResponseEntity<Farmacia> findByProducto(
             @PathVariable("id") Long id){
-        String farmacia = farmaciaRepository.farmaciaPorProducto(id);
-        return new ResponseEntity<String>(farmacia, HttpStatus.OK);
+        Farmacia farmacia = farmaciaRepository.farmaciaPorProducto(id);
+        return new ResponseEntity<Farmacia>(farmacia, HttpStatus.OK);
     }
 
     @GetMapping("/farmacias/buscarporcorreo/{correo}")

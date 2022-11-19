@@ -19,14 +19,59 @@ public class Venta {
     @JoinColumn(name="id_farmacia", nullable=false)
     private Farmacia farmacia;
 
+    @ManyToOne
+    @JoinColumn(name="id_producto", nullable=false)
+    private Producto producto;
 
-    public Venta(){
+    public Venta() {
+
     }
 
-    public Venta(Date fecha, Cliente cliente, Farmacia farmacia) {
+    public Producto getProducto() {
+        return producto;
+    }
+
+    float precioUnit;
+    int cantidad;
+
+    public float getPrecioUnit() {
+        return precioUnit;
+    }
+
+    public void setPrecioUnit(float precioUnit) {
+        this.precioUnit = precioUnit;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public float getPrecioTotal() {
+        return precioTotal;
+    }
+
+    public void setPrecioTotal(float precioTotal) {
+        this.precioTotal = precioTotal;
+    }
+
+    float precioTotal;
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
+
+    public Venta( Date fecha, Cliente cliente, Farmacia farmacia, Producto producto, float precioUnit, int cantidad, float precioTotal) {
         this.fecha = fecha;
         this.cliente = cliente;
         this.farmacia = farmacia;
+        this.producto = producto;
+        this.precioUnit = precioUnit;
+        this.cantidad = cantidad;
+        this.precioTotal = precioTotal;
     }
 
     public Farmacia getFarmacia() {
