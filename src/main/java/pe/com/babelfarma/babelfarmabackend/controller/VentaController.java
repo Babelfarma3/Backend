@@ -44,6 +44,15 @@ public class VentaController {
     }
 
     @Transactional(readOnly=true)
+    @GetMapping("/ventas/buscarporcliente/{idCliente}")
+    public ResponseEntity<List<Venta>> getVentasByIdCliente(
+            @PathVariable("idCliente") Long idCliente
+    ){
+        List<Venta> ventas = ventaRepository.findByIdCliente(idCliente);
+        return new ResponseEntity<List<Venta>>(ventas, HttpStatus.OK);
+    }
+
+    @Transactional(readOnly=true)
     @GetMapping("/ventas/buscarpormes/{mes}/{idFarmacia}")
     public ResponseEntity<List<Venta>> getVentasByMes(
             @PathVariable("mes") int mes,
