@@ -1,8 +1,10 @@
 package pe.com.babelfarma.babelfarmabackend.controller;
 
+import org.etsi.uri.x01903.v13.SignerRoleType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import pe.com.babelfarma.babelfarmabackend.exception.ResourceNotFoundException;
 import pe.com.babelfarma.babelfarmabackend.repository.ClienteRepository;
@@ -27,9 +29,11 @@ public class ClienteController {
         Cliente cliente = clienteRepository.findByIdJPQL(id);
         return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
     }
-    @GetMapping("/clientes/dni/{dni}")
-    public ResponseEntity<Cliente> findByDNINum(@PathVariable("dni") int dni){
-        Cliente cliente = clienteRepository.findByDniJPQL(dni);
+    @Transactional(readOnly = true)
+    @GetMapping("/clientes/dni/{dni}/correo/{correo}")
+    public ResponseEntity<Cliente> findByDNINum(@PathVariable("dni") int dni,
+                                                @PathVariable("correo") String correo){
+        Cliente cliente = clienteRepository.findByDniJPQL(dni, correo);
         return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
     }
     @GetMapping("/clientes/sexo/{sexo}")
@@ -87,6 +91,10 @@ public class ClienteController {
         clienteUpdate.setContraseña(cliente.getContraseña());
         return new ResponseEntity<Cliente>(clienteRepository.save(clienteUpdate), HttpStatus.OK);
     }
+
+
+
+
     @DeleteMapping("/clientes/{id}")
     public ResponseEntity<HttpStatus> deleteCliente(@PathVariable("id") Long id){
         clienteRepository.deleteById(id);
