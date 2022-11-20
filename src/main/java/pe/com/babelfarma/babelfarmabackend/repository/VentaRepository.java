@@ -10,7 +10,7 @@ public interface VentaRepository
     extends JpaRepository<Venta, Long> {
     List<Venta> findById(long id);
 
-    @Query(value = "select * from venta v where v.id_farmacia=?1", nativeQuery = true)
+    @Query(value = "select v.* from venta v where v.id_farmacia=?1", nativeQuery = true)
     List<Venta> findByFarmaciaId(Long id);
 
     @Query(value="select v.* from venta v inner join cliente c on v.id_cliente = c.id " +
