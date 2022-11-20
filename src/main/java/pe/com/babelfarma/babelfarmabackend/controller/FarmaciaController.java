@@ -104,7 +104,7 @@ public class FarmaciaController {
             @PathVariable("id") Long id,
             @RequestBody Farmacia farmacia){
         Farmacia farmaciaUpdate = farmaciaRepository.findById(id)
-                .orElseThrow(()->new ResourceNotFoundException("No se encontró el cliente con id: " + id));
+                .orElseThrow(()->new ResourceNotFoundException("No se encontró la farmacia con id: " + id));
         farmaciaUpdate.setRuc(farmacia.getRuc());
         farmaciaUpdate.setNombresDuenio(farmacia.getNombresDuenio());
         farmaciaUpdate.setApellidosDuenio(farmacia.getApellidosDuenio());
@@ -113,7 +113,7 @@ public class FarmaciaController {
         farmaciaUpdate.setCorreoContacto(farmacia.getCorreoContacto());
         farmaciaUpdate.setTelefonoContacto(farmacia.getTelefonoContacto());
         farmaciaUpdate.setDistrito(farmacia.getDistrito());
-        farmaciaUpdate.setContraseña(farmaciaUpdate.getContraseña());
+        farmaciaUpdate.setContraseña(farmacia.getContraseña());
         farmaciaUpdate.setRole(farmacia.getRole());
 
         return new ResponseEntity<Farmacia>(farmaciaRepository.save(farmaciaUpdate), HttpStatus.OK);
