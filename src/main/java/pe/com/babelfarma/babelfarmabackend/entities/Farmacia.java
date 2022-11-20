@@ -14,7 +14,7 @@ public class Farmacia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int ruc;
+    private Long ruc;
 
     private String nombresDuenio;
 
@@ -48,7 +48,7 @@ public class Farmacia {
     public Farmacia() {
     }
 
-    public Farmacia(int ruc, String nombresDuenio, String apellidosDuenio, String nombreEstablecimiento, String direccion, String correoContacto, int telefonoContacto, Distrito distrito,
+    public Farmacia(Long ruc, String nombresDuenio, String apellidosDuenio, String nombreEstablecimiento, String direccion, String correoContacto, int telefonoContacto, Distrito distrito,
                     Role role, String contraseña) {
         this.ruc = ruc;
         this.nombresDuenio = nombresDuenio;
@@ -102,11 +102,11 @@ public class Farmacia {
         this.role = role;
     }
 
-    public int getRuc() {
+    public Long getRuc() {
         return ruc;
     }
 
-    public void setRuc(int ruc) {
+    public void setRuc(Long ruc) {
         this.ruc = ruc;
     }
 
