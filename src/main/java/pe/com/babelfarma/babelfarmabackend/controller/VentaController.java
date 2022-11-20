@@ -33,6 +33,16 @@ public class VentaController {
         return new ResponseEntity<List<Venta>>(ventas, HttpStatus.OK);
     }
 
+    @Transactional(readOnly=true)
+    @GetMapping("/ventas/buscarporcliente/{nombre}/{idFarmacia}")
+    public ResponseEntity<List<Venta>> getVentasByNombreCliente(
+            @PathVariable("nombre") String nombre,
+            @PathVariable("idFarmacia") Long idFarmacia
+    ){
+        List<Venta> ventas = ventaRepository.findByNombreCliente(nombre,idFarmacia);
+        return new ResponseEntity<List<Venta>>(ventas, HttpStatus.OK);
+    }
+
     @PostMapping("/ventas")
     public ResponseEntity<Venta> createVenta(@RequestBody Venta venta){
         Venta newVenta =
