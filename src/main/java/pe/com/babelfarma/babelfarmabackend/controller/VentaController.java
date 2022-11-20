@@ -3,7 +3,9 @@ package pe.com.babelfarma.babelfarmabackend.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import pe.com.babelfarma.babelfarmabackend.entities.Farmacia;
 import pe.com.babelfarma.babelfarmabackend.exception.ResourceNotFoundException;
 import pe.com.babelfarma.babelfarmabackend.repository.VentaRepository;
 import pe.com.babelfarma.babelfarmabackend.entities.Venta;
@@ -21,6 +23,16 @@ public class VentaController {
         List<Venta> ventas = ventaRepository.findAll();
         return new ResponseEntity<List<Venta>>(ventas, HttpStatus.OK);
     }
+    @Transactional(readOnly=true)
+    @GetMapping("/ventas/buscarporfarmacia/{farmaciaId}")
+    public ResponseEntity<List<Venta>> getVentasByFarmaciaId(
+            @PathVariable("farmaciaId") Long id
+    ){
+        List<Venta> ventas = ventaRepository.findByFarmaciaId(id);
+
+        return new ResponseEntity<List<Venta>>(ventas, HttpStatus.OK);
+    }
+
     @PostMapping("/ventas")
     public ResponseEntity<Venta> createVenta(@RequestBody Venta venta){
         Venta newVenta =
