@@ -27,8 +27,8 @@ public interface FarmaciaRepository extends JpaRepository<Farmacia, Long> {
   List<String> findProducsByStock();
 
 
-  @Query("SELECT f FROM Farmacia f WHERE f.correoContacto=?1")
-  Farmacia findByCorreoYContraseña(String correo);
+  @Query("SELECT f FROM Farmacia f WHERE f.ruc=?1 AND f.correoContacto=?2")
+  Farmacia findByRucyCorreo(Long ruc, String correo);
 
 
   @Query(value="select * from farmacias f inner join farmacias_productos fp on f.id = fp.farmacia_id inner join productos p on fp.producto_id = p.id where p.id=?1", nativeQuery = true)

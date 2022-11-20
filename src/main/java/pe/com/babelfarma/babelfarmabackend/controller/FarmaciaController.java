@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import pe.com.babelfarma.babelfarmabackend.entities.Cliente;
 import pe.com.babelfarma.babelfarmabackend.entities.Farmacia;
@@ -25,23 +26,19 @@ public class FarmaciaController {
         List<Farmacia> farmacias = farmaciaRepository.findAll();
         return new ResponseEntity<List<Farmacia>>(farmacias, HttpStatus.OK);
     }
-
-
     @GetMapping("/farmacias/buscarporproducto/{id}")
     public ResponseEntity<Farmacia> findByProducto(
             @PathVariable("id") Long id){
         Farmacia farmacia = farmaciaRepository.farmaciaPorProducto(id);
         return new ResponseEntity<Farmacia>(farmacia, HttpStatus.OK);
     }
-
-    @GetMapping("/farmacias/buscarporcorreo/{correo}")
-    public ResponseEntity<Farmacia> findByCorreoYContraseña(
-            @PathVariable("correo") String correoContacto){
-        Farmacia farmacia = farmaciaRepository.findByCorreoYContraseña(correoContacto);
+    @Transactional(readOnly = true)
+    @GetMapping("/farmacias/ruc/{ruc}/correo/{correo}")
+    public ResponseEntity<Farmacia> findByCorreoYContraseña(@PathVariable("ruc") Long ruc,
+                                                            @PathVariable("correo") String correoContacto){
+        Farmacia farmacia = farmaciaRepository.findByRucyCorreo(ruc, correoContacto);
         return new ResponseEntity<Farmacia>(farmacia, HttpStatus.OK);
     }
-
-
     @GetMapping("/farmacias/buscarid/{buscarid}")
     public ResponseEntity<Farmacia> findById(
             @PathVariable("buscarid") Long id){
@@ -49,7 +46,6 @@ public class FarmaciaController {
 
         return new ResponseEntity<Farmacia>(farmacia, HttpStatus.OK);
     }
-
     @GetMapping("/farmacias/buscardireccion/{direccion}")
     public ResponseEntity<List<Farmacia>> findByDireccion(
             @PathVariable("direccion") String direccion
@@ -69,7 +65,6 @@ public class FarmaciaController {
 
         return new ResponseEntity<List<Farmacia>>(farmacias, HttpStatus.OK);
     }
-
     @GetMapping("/farmacias/buscarpordistrito/{distrito}")
     public ResponseEntity<List<Farmacia>> findByDistrito(
             @PathVariable("distrito") String distrito
@@ -79,7 +74,6 @@ public class FarmaciaController {
 
         return new ResponseEntity<List<Farmacia>>(farmacias, HttpStatus.OK);
     }
-
     @GetMapping("/farmacias/productos")
     public ResponseEntity<List<String>> findProductosByStock(){
 
@@ -87,9 +81,6 @@ public class FarmaciaController {
 
         return new ResponseEntity<List<String>>(farmacias, HttpStatus.OK);
     }
-
-
-
     @PostMapping("/farmacias")
     public ResponseEntity<Farmacia> createFarmacia(@RequestBody Farmacia farmacia){
         Farmacia newFarmacia =
@@ -132,6 +123,4 @@ public class FarmaciaController {
         farmaciaRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-
 }
