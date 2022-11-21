@@ -4,6 +4,5 @@ Integrantes:
   - Barja Estrada, Luis Diego
   - Lucero Lucero, Pricila Yacori
   - Sosa Ostas, Angel Gabriel
-  - Fuentes Ibarra, Rafael Nicolas
 
 Aqui se desarrollara el backend respecto a la aplicación web denominada BabelFarma
