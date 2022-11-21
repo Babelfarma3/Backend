@@ -24,7 +24,7 @@ public interface ProductoRepository extends JpaRepository<Producto, Long>{
     @Query("select p from Producto p order by p.stock desc")
     List<Producto> ListProductoStockJPQL();
 
-    @Query(value="select * from productos a inner join farmacias_productos b on a.id = b.producto_id", nativeQuery = true)
+    @Query(value="select * from productos a inner join farmacias_productos b on a.id = b.producto_id order by a.precio asc", nativeQuery = true)
     List<Producto> ListProductoPrecioJPQL();
 
 
